@@ -79,7 +79,7 @@ updateCorpse(form){
     form.value.id_corpse == this.selectedCorpse.id_corpse;
         console.log("id po = ",form.value.id_user);
     console.log("create v if selected ",this.selectedUser.id_user );
-    console.log("create v if form ", form.value.id_user);
+    console.log("create v if form id  ", form.value.id_user);
     console.log("create v if registration ", form.value);
     this.ApiService.updateCorpse(form.value).subscribe((corpse: Corpses)=>{
       console.log("User update", form.value);
