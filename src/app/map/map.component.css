@@ -1,0 +1,132 @@
+.box {
+    border-radius: 0.vw;
+    float: left;
+    width: 1vw;
+    height: 1vw;
+    margin-right: 1.5vw;
+}
+.container{
+    overflow: hidden;
+    width: 100%;
+    border-radius: 3vw
+}
+.legend{
+    float: left;
+    background-color: rgb(250, 249, 249);
+    box-shadow: 0.7vw 1vw rgba(0, 0, 0, 0.5);
+    border-radius: 3vw;
+    margin-top: 5.5vw;
+    margin-left: 3vw;
+    border: 2px solid black;
+    height: 30vw;
+    width: 20vw;
+}
+.a{
+    margin-left: 1.5vw;
+    margin-top: 8vw;
+}
+.map-container{
+    overflow: hidden;
+    margin-top: 5.5vw;
+    border-radius: 3vw;
+    box-shadow: 0.7vw 1vw rgba(0, 0, 0, 0.5);
+    margin-left: 30vw;
+    border: 2px solid black;
+    height: 30vw;
+    width: 60%;
+}
+.map-frame{
+    border: 2px solid black;
+    box-shadow: 0.7vw 1vw rgba(0, 0, 0, 0.5);
+    border-radius: 1.5vw;
+    height: 100%;
+    width: 100%;
+}
+
+#map{
+    border-radius: 1.5vw;
+    height: 100%;
+}
+
+.form{
+    box-shadow: 0.7vw 0.9vw rgba(0, 0, 0, 0.5);
+    width: 40vw;
+    height: 4vw;
+    margin-left: 25vw;
+    margin-top: 2vw;
+    background-color: rgb(250, 249, 249);
+    border: 0.2vw solid;
+    border-radius: 1.5vw;
+    text-align: center;
+}
+
+.title{
+    margin-top: 5vw;
+    font-size: 2 vw;
+    color: black;
+    font-family: "Times New Roman", Times, serif;
+    margin-bottom: 5vw;
+}
+.subtitle{
+    font-size: 30px;
+    color: black;
+    font-family: "Times New Roman", Times, serif;
+
+}
+label{
+    margin-top: 1vw;
+    font-size: 1vw;
+    color:  #474747;
+    font-family: "Times New Roman", Times, serif;
+}
+input{
+    margin-top: 1vw;
+    margin-left: 1vw;
+    font-size: 1vw;
+    color: black;
+    font-family: "Times New Roman", Times, serif;
+}
+ul {
+    font-family: "Times New Roman", Times, serif;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000059;
+    height: 8w;
+    border-radius: 0.5vw;
+}
+li {
+    float: left;
+}
+li a {
+    font-family: 'Times New Roman', Times, serif;
+    display: block;
+    color: rgb(241, 241, 241);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover {
+    opacity: 0.5;
+    background-color: #2e2ee2;
+    color: white;
+    border-radius: 0.5vw;
+}
+.active {
+    background-color: #0606aa;
+    border-radius: 1;
+  }
+
+  button {
+    margin-top: 1vw;
+    background-color: #000059;
+    border-radius: 0.5vw;
+    color: white;
+    height: 2vw;
+    width: 4vw;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }

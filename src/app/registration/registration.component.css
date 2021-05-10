@@ -1,0 +1,80 @@
+body{
+    height: 100%;
+    width: 80%;
+    margin-left: 10%;
+}
+
+.form{
+    box-shadow:  0.7vw 0.9vw rgba(0, 0, 0, 0.5);
+    width: 50vw;
+    height: 33vw;
+    margin-left: 15vw;
+    margin-top: 5vw;
+    background-color: rgb(250, 249, 249);
+    border: 0.2vw solid;
+    border-radius: 3vw;
+    text-align: center;
+}
+.title{
+    margin-top: 5vw;
+    font-size: 2 vw;
+    color: black;
+    font-family: "Times New Roman", Times, serif;
+    margin-bottom: 5vw;
+}
+label{
+    margin-top: 1vw;
+    font-size: 1vw;
+    color:  #474747;
+    font-family: "Times New Roman", Times, serif;
+}
+input{
+    margin-top: 1vw;
+    margin-left: 1vw;
+    font-size: 1vw;
+    color: black;
+    font-family: "Times New Roman", Times, serif;
+}
+ul {
+    font-family: "Times New Roman", Times, serif;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000059;
+    height: 8w;
+    border-radius: 0.5vw;
+}
+li {
+    float: left;
+}
+li a {
+    font-family: 'Times New Roman', Times, serif;
+    display: block;
+    color: rgb(241, 241, 241);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover {
+    opacity: 0.5;
+    background-color: #2e2ee2;
+    color: white;
+    border-radius: 0.5vw;
+}
+.active {
+    background-color: #0606aa;
+    border-radius: 1;
+  }
+
+  button {
+    margin-top: 1vw;
+    background-color: #000059;
+    border-radius: 0.5vw;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }

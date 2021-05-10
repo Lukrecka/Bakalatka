@@ -1,0 +1,44 @@
+
+ul {
+    font-family: "Times New Roman", Times, serif;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000059;
+    height: 8w;
+    border-radius: 0.5vw;
+}
+li {
+    float: left;
+}
+li a {
+    font-family: 'Times New Roman', Times, serif;
+    display: block;
+    color: rgb(241, 241, 241);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover {
+    opacity: 0.5;
+    background-color: #111;
+    color: white;
+    border-radius: 0.5vw;
+}
+.active {
+    background-color: #0606aa;
+    border-radius: 1;
+  }
+
+  button {
+    margin-top: 1vw;
+    background-color: #000059;
+    border-radius: 0.5vw;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+  }

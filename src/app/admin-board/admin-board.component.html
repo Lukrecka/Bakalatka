@@ -1,0 +1,135 @@
+<p>Cintorin</p>
+<table border='1' width='100%' style='border-collapse: collapse;'>
+    <tr>
+      <th>ID miesta</th>
+      <th>Súradnica 1</th>
+      <th>Súradnica 2</th>
+      <th>Súradnica 3</th>
+      <th>Súradnica 4</th>
+      <th>Typ miesta</th>
+  
+    </tr>
+  
+    <tr *ngFor="let cemetery of cemetery">
+      <td>{{ cemetery.id_grave }}</td>
+      <td>{{ cemetery.coor1 }}</td>
+      <td>{{ cemetery.coor2 }}</td>
+      <td>{{ cemetery.coor3 }}</td>
+      <td>{{ cemetery.coor4 }}</td>
+      <td>{{ cemetery.type }}</td>
+      <td>
+        <button (click)="delete(cemetery.id_grave,'grave')">Delete</button>
+      </td>
+    </tr>
+  </table>
+
+  <p>Zosnuly</p>
+  <table border='1' width='100%' style='border-collapse: collapse;'>
+    <tr>
+      <th>ID zosnuleho</th>
+      <th>ID hrobu</th>
+      <th>Meno</th>
+      <th>Priezvisko</th>
+      <th>Datum narodenia</th>
+      <th>Datum umrtia</th>
+      <th>Datum zaplatene do</th>
+  
+    </tr>
+  
+    <tr *ngFor="let corpses of corpses">
+      <td>{{ corpses.id_corpse }}</td>
+      <td>{{ corpses.id_grave }}</td>
+      <td>{{ corpses.name }}</td>
+      <td>{{ corpses.lastname }}</td>
+      <td>{{ corpses.birthDay }}</td>
+      <td>{{ corpses.deadDay }}</td>
+      <td>{{ corpses.paidBy }}</td>
+      <td>
+        <button (click)="delete(corpses.id_corpse,'corpse')">Delete</button>
+        <button (click)="selectCorpse(corpses)">Update</button>
+      </td> 
+    </tr>
+  </table>
+  <div class="updateCorpses">
+    <form #formUser = "ngForm">
+      <label>Id hrob</label>
+      <input type="number" name="id_grave" [(ngModel)] = "selectedCorpse.id_grave">
+      <label>meno</label>
+      <input type="text" name="name" [(ngModel)] = "selectedCorpse.name">
+      <label>priezvisko</label>
+      <input type="text" name="lastname" [(ngModel)] = "selectedCorpse.lastname">
+      <label>Dátum narodenia</label>
+      <input type="text" name="birthDay" [(ngModel)] = "selectedCorpse.birthDay">
+      <label>Dátum úmrtia</label>
+      <input type="text" name="deadDay" [(ngModel)] = "selectedCorpse.deadDay">
+      <label>Zaplatené do</label>
+      <input type="text" name="paidBy" [(ngModel)] = "selectedCorpse.paidBy">
+
+      <input type="button" (click)="updateCorpse(updateCorpses)" value="Update">
+    </form>
+  </div>
+
+  <p>Uzivatelia</p>
+  <table border='1' width='100%' style='border-collapse: collapse;'>
+    <tr>
+      <th>ID uzivatela</th>
+      <th>Id hrob</th>
+      <th>Meno</th>
+      <th>Priezvisko</th>
+      <th>Tel. cislo</th>
+      <th>email</th>
+      <th>heslo</th>
+  
+    </tr>
+  
+    <tr *ngFor="let registration of registration">
+      <td>{{ registration.id_user }}</td>
+      <td>{{ registration.id_grave }}</td>
+      <td>{{ registration.name }}</td>
+      <td>{{ registration.lastname }}</td>
+      <td>{{ registration.number }}</td>
+      <td>{{ registration.email }}</td>
+      <td>{{ registration.password }}</td>
+      <td>
+        <button (click)="delete(registration.id_user,'user')">Delete</button>
+        <button (click)="selectUser(registration)">Update</button>
+      </td>
+    </tr>
+  </table>
+
+  <div class="updateUser">
+    <form #formUser = "ngForm">
+      <label>Id hrob</label>
+      <input type="number" name="id_grave" [(ngModel)] = "selectedUser.id_grave">
+      <label>meno</label>
+      <input type="text" name="name" [(ngModel)] = "selectedUser.name">
+      <label>priezvisko</label>
+      <input type="text" name="lastname" [(ngModel)] = "selectedUser.lastname">
+      <label>Tel</label>
+      <input type="text" name="number" [(ngModel)] = "selectedUser.number">
+      <label>Email</label>
+      <input type="text" name="email" [(ngModel)] = "selectedUser.email">
+
+      <input type="button" (click)="updateUser(formUser)" value="Update">
+    </form>
+  </div>
+
+
+  <p>Platby</p>
+  <table border='1' width='100%' style='border-collapse: collapse;'>
+    <tr>
+      <th>ID uzivatela</th>
+      <th>Id hrob</th>
+      <th>Den zaplatenia</th>
+      <th>typ miesta</th>
+
+  
+    </tr>
+  
+    <tr *ngFor="let payment of payment">
+      <td>{{ payment.id_user }}</td>
+      <td>{{ payment.id_grave }}</td>
+      <td>{{ payment.paidDay }}</td>
+      <td>{{ payment.type }}</td>
+    </tr>
+  </table>
