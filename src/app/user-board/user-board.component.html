@@ -1,0 +1,44 @@
+<p>Miesta </p>
+<table border='1' width='100%' style='border-collapse: collapse;'>
+  <tr>
+    <th>Id hrob</th>
+    <th>Typ</th>
+  </tr>
+
+  <tr *ngFor="let cemetery of cemetery">
+    <td>{{ cemetery.id_grave }}</td>
+    <td>{{ cemetery.type }}</td>
+  </tr>
+</table>
+
+<p>Zosnulý </p>
+<table border='1' width='100%' style='border-collapse: collapse;'>
+  <tr>
+    <th>Meno</th>
+    <th>Priezvisko</th>
+    <th>Dátum narodenia</th>
+    <th>Dátum úmrtia</th>
+    <th>Zaplatené do</th>
+  </tr>
+
+  <tr *ngFor="let corpses of corpses">
+    <td>{{ corpses.name }}</td>
+    <td>{{ corpses.lastname }}</td>
+    <td>{{ corpses.birthDay }}</td>
+    <td>{{ corpses.deadDay }}</td>
+    <td>{{ corpses.paidBy }}</td>
+  </tr>
+</table>
+
+<p>Platby </p>
+<table border='1' width='100%' style='border-collapse: collapse;'>
+  <tr>
+    <th>Dátum zaplatenia</th>
+    <th>Typ</th>
+  </tr>
+
+  <tr *ngFor="let cemetery of cemetery">
+    <td>{{ cemetery.paidDay }}</td>
+    <td>{{ cemetery.type }}</td>
+  </tr>
+</table>

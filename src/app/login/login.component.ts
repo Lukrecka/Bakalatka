@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
     data.action = 'login';
     const x = this.ApiService.loginrUser(data);
     console.log("dash ", data);
+    console.log(x);
     
   }
 

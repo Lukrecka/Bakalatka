@@ -1,42 +1,50 @@
-<div class="navBar">
-    <nav>
-        <ul>
-          <li><a routerLink="/login" routerLinkActive="active">Prihlásenie</a></li>
-          <li><a routerLink="/registration" routerLinkActive="active">Registrácia</a></li>
-          <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
-          <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
-        </ul>
-    </nav>
- </div>
- <div class="form">
-    <form #form="ngForm" (ngSubmit)="findGrave(form.value)">
-        <label>Vyhľadať záznam podľa priezviska</label>
-        <input ngModel minlength="3" name="lastname" class="form-control" id="lastname" type="text" #Priezvisko="ngModel">
-        <button>Hladať</button>
-    </form>
-</div>
-<div class="container">
-    <div class="legend">
-        <div class="a">
-            <p class="subtitle">Farebné označenie:</p>
-            <span class="box" style="background-color: aqua;">&nbsp;</span>
-            <p>Hrob s uhradenou zmluvou a zosnulým</p>
-            <span class="box" style="background-color: rgb(255, 0, 128);">&nbsp;</span>
-            <p>Hrob s uhradenou zmluvou bez zosnulého</p>
-            <span class="box" style="background-color: red;">&nbsp;</span>
-            <p>Hrob s neuhradradenou zmluvou a zosnulým</p>
-            <span class="box" style="background-color: rgb(12, 20, 240);">&nbsp;</span>
-            <p>Hrob s neuhradenou zmluvou bez zosnulého</p>
-        </div>
-    </div>
-    
-    <div class="map-container">
-        <div class="map-frame">
-            <div id="map"></div>
-        </div>
-    </div>
-</div>
+<body>
+    <div class="wrap">
 
+        <div class="navBar">
+            <nav>
+                <ul>
+                <li><a routerLink="/login" routerLinkActive="active">Prihlásenie</a></li>
+                <li><a routerLink="/registration" routerLinkActive="active">Registrácia</a></li>
+                <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
+                <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="form">
+            <form #form="ngForm" (ngSubmit)="findGrave(form.value)">
+                <label>Vyhľadať záznam podľa priezviska</label>
+                <input ngModel minlength="3" name="lastname" class="form-control" id="lastname" type="text" #Priezvisko="ngModel">
+                <button>Hladať</button>
+            </form>
+        </div>
+        <div class="container">
+            <div class="legend">
+                <div class="a">
+                    <p class="subtitle">Farebné označenie:</p>
+                    <span class="box" style="background-color: aqua;">&nbsp;</span>
+                    <p>Hrob s uhradenou zmluvou a zosnulým</p>
+                    <span class="box" style="background-color: rgb(255, 0, 128);">&nbsp;</span>
+                    <p>Hrob s uhradenou zmluvou bez zosnulého</p>
+                    <span class="box" style="background-color: red;">&nbsp;</span>
+                    <p>Hrob s neuhradradenou zmluvou a zosnulým</p>
+                    <span class="box" style="background-color: rgb(12, 20, 240);">&nbsp;</span>
+                    <p>Hrob s neuhradenou zmluvou bez zosnulého</p>
+                </div>
+            </div>
+            
+            <div class="map-container">
+                <div class="map-frame">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="bg">
+      <img src="../cintorin.jpg" alt="">
+    </div>
+  </body>
 <!--
     <button (click)="sendMails()">Poslat mail</button>
 -->

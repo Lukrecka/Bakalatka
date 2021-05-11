@@ -12,6 +12,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 import { InfoComponent } from './info/info.component';
 import { AdminBoardComponent } from './admin-board/admin-board.component';
+import { UserBoardComponent } from './user-board/user-board.component';
 //import { ApiService } from './_services/api.service';
 
 @NgModule({
@@ -22,6 +23,7 @@ import { AdminBoardComponent } from './admin-board/admin-board.component';
     LoginComponent,
     InfoComponent,
     AdminBoardComponent,
+    UserBoardComponent,
    // ApiService
   ],
   imports: [

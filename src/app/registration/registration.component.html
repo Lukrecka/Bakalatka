@@ -1,47 +1,53 @@
 <body>
-  <div class="navBar">
-    <nav>
-        <ul>
-          <li><a routerLink="/registration" routerLinkActive="active">Registrácia</a></li>
-          <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
-          <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
-          <li><a routerLink="/login" routerLinkActive="active">Prihlásenie</a></li>
-        </ul>
-    </nav>
+  <div class="wrap">
+    <div class="navBar">
+      <nav>
+          <ul>
+            <li><a routerLink="/registration" routerLinkActive="active">Registrácia</a></li>
+            <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
+            <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
+            <li><a routerLink="/login" routerLinkActive="active">Prihlásenie</a></li>
+          </ul>
+      </nav>
+    </div>
+    <div class="form">
+      <h1 class="title">REGISTRACIA</h1>
+      <form #form="ngForm" (ngSubmit)="registerUser(form.value)">
+        <div>
+          <label for="name">Meno</label>
+          <input ngModel minlength="3" name="name" class="form-control" id="name" type="text" #name="ngModel">
+          <div class="alert alert-danger" *ngIf="!name.valid && name.touched">Prázdne políčko</div>
+        </div>
+        <div>
+          <label for="lastname">Priezvisko</label>
+          <input ngModel minlength="3" name="lastname" class="form-control" id="lastname" type="text" #lastname="ngModel">
+          <div class="alert alert-danger" *ngIf="!lastname.valid && lastname.touched">Prázdnepolíčko</div>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input ngModel email="true" name="email" class="form-control" id="email" type="text" #email="ngModel">
+          <div class="alert alert-danger" *ngIf="!email.valid && email.touched">
+            <div *ngIf="email.errors.email">Totonie je email!!!!</div>
+          </div>
+        </div>
+        <div>
+          <label for="password">Heslo</label>
+          <input ngModel minlength="5" name="password" class="form-control" id="password" type="password" #password="ngModel">
+          <div class="alert alert-danger" *ngIf="!password.valid && password.touched">
+            <div *ngIf="password.errors.minlength">Heslo je príliš krátke, minimálny počet znakov je {{password.errors.minlength.requiredLength}}</div>
+          </div>
+        </div>
+        <div>
+          <label for="number">Mobil</label>
+          <input ngModel minlength="3" name="number" class="form-control" id="number" type="text" #number="ngModel">
+          <div class="alert alert-danger" *ngIf="!number.valid && number.touched">Prázdne políčko</div>
+        </div>
+        <button class="btn btn-default" [disabled]="form.invalid" >Odoslať</button>
+      </form>
+    </div>
   </div>
-  <div class="form">
-    <h1 class="title">REGISTRACIA</h1>
-    <form #form="ngForm" (ngSubmit)="registerUser(form.value)">
-      <div>
-        <label for="name">Meno</label>
-        <input ngModel minlength="3" name="name" class="form-control" id="name" type="text" #name="ngModel">
-        <div class="alert alert-danger" *ngIf="!name.valid && name.touched">Prázdne políčko</div>
-      </div>
-      <div>
-        <label for="lastname">priezvisko</label>
-        <input ngModel minlength="3" name="lastname" class="form-control" id="lastname" type="text" #lastname="ngModel">
-        <div class="alert alert-danger" *ngIf="!lastname.valid && lastname.touched">Prázdnepolíčko</div>
-      </div>
-      <div>
-        <label for="email">Mail</label>
-        <input ngModel email="true" name="email" class="form-control" id="email" type="text" #email="ngModel">
-        <div class="alert alert-danger" *ngIf="!email.valid && email.touched">
-          <div *ngIf="email.errors.email">Totonie je email!!!!</div>
-        </div>
-      </div>
-      <div>
-        <label for="password">heslo</label>
-        <input ngModel minlength="5" name="password" class="form-control" id="password" type="password" #password="ngModel">
-        <div class="alert alert-danger" *ngIf="!password.valid && password.touched">
-          <div *ngIf="password.errors.minlength">Heslo je príliš krátke, minimálny počet znakov je {{password.errors.minlength.requiredLength}}</div>
-        </div>
-      </div>
-      <div>
-        <label for="number">telefon</label>
-        <input ngModel minlength="3" name="number" class="form-control" id="number" type="text" #number="ngModel">
-        <div class="alert alert-danger" *ngIf="!number.valid && number.touched">Prázdne políčko</div>
-      </div>
-      <button class="btn btn-default" [disabled]="form.invalid" >Odoslať</button>
-    </form>
+
+  <div id="bg">
+    <img src="../cintorin.jpg" alt="">
   </div>
 </body>

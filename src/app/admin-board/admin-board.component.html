@@ -19,9 +19,29 @@
       <td>{{ cemetery.type }}</td>
       <td>
         <button (click)="delete(cemetery.id_grave,'grave')">Delete</button>
-      </td>
+        <button (click)="selectGrave(cemetery)">Update</button>  
+      </td> 
     </tr>
   </table>
+  <div class="graves">
+    <form #formGrave = "ngForm">
+      <label>Id hrob</label>
+      <input type="number" name="id_grave" [(ngModel)] = "selectedGrave.id_grave">
+      <label>Sur1</label>
+      <input type="text" name="coor1" [(ngModel)] = "selectedGrave.coor1">
+      <label>Sur2</label>
+      <input type="text" name="coor2" [(ngModel)] = "selectedGrave.coor2">
+      <label>Sur3</label>
+      <input type="text" name="coor3" [(ngModel)] = "selectedGrave.coor3">
+      <label>Sur4</label>
+      <input type="text" name="coor4" [(ngModel)] = "selectedGrave.coor4">
+      <label>Typ</label>
+      <input type="text" name="type" [(ngModel)] = "selectedGrave.type">
+      <input type="button" (click)="updateGrave(formGrave)" value="Update">
+      <input type="button" (click)="createGrave(formGrave)" value="Create">
+      
+    </form>
+  </div>
 
   <p>Zosnuly</p>
   <table border='1' width='100%' style='border-collapse: collapse;'>
@@ -46,12 +66,12 @@
       <td>{{ corpses.paidBy }}</td>
       <td>
         <button (click)="delete(corpses.id_corpse,'corpse')">Delete</button>
-        <button (click)="selectCorpse(corpses)">Update</button>
+        <button (click)="selectCorpse(corpses)">Update</button>  
       </td> 
     </tr>
   </table>
-  <div class="updateCorpses">
-    <form #formUser = "ngForm">
+  <div class="corpses">
+    <form #formCorpse = "ngForm">
       <label>Id hrob</label>
       <input type="number" name="id_grave" [(ngModel)] = "selectedCorpse.id_grave">
       <label>meno</label>
@@ -64,8 +84,8 @@
       <input type="text" name="deadDay" [(ngModel)] = "selectedCorpse.deadDay">
       <label>Zaplatené do</label>
       <input type="text" name="paidBy" [(ngModel)] = "selectedCorpse.paidBy">
-
-      <input type="button" (click)="updateCorpse(updateCorpses)" value="Update">
+      <input type="button" (click)="updateCorpse(formCorpse)" value="Update">
+      
     </form>
   </div>
 
@@ -109,7 +129,6 @@
       <input type="text" name="number" [(ngModel)] = "selectedUser.number">
       <label>Email</label>
       <input type="text" name="email" [(ngModel)] = "selectedUser.email">
-
       <input type="button" (click)="updateUser(formUser)" value="Update">
     </form>
   </div>
@@ -122,8 +141,6 @@
       <th>Id hrob</th>
       <th>Den zaplatenia</th>
       <th>typ miesta</th>
-
-  
     </tr>
   
     <tr *ngFor="let payment of payment">
@@ -131,5 +148,23 @@
       <td>{{ payment.id_grave }}</td>
       <td>{{ payment.paidDay }}</td>
       <td>{{ payment.type }}</td>
+      <td>
+        <button (click)="selectPayment(payment)">Update</button>
+      </td>
     </tr>
   </table>
+
+  <div class="updatePayment">
+    <form #formPayment = "ngForm">
+      <label>Id uzivatela</label>
+      <input type="number" name="id_user" [(ngModel)] = "selectedPayment.id_user">
+      <label>Id hrob</label>
+      <input type="number" name="id_grave" [(ngModel)] = "selectedPayment.id_grave">
+      <label>Den zaplatenia</label>
+      <input type="text" name="paidDay" [(ngModel)] = "selectedPayment.paidDay">
+      <label>typ miesta</label>
+      <input type="text" name="type" [(ngModel)] = "selectedPayment.type">
+      <input type="button" (click)="updatePayment(formPayment)" value="Update">
+      <input type="button" (click)="createPayment(formPayment)" value="Create">
+    </form>
+  </div>

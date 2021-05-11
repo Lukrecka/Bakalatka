@@ -109,7 +109,10 @@ export class MapComponent implements AfterViewInit {
     var i=0;
     this.http.get(this.apiUrl).subscribe((res: any) =>{
       for(const c of res){;
-        console.log(res[i]['name'])
+        //console.log("ID corpse" ,res[i]['id_corpse']);
+        //console.log("ID grave" ,res[i]['id_grave']);
+
+        var id_corpse = res[i]['id_corpse'];
         var lat1 = res[i]['coor1'];
         var lon1 = res[i]['coor2'];
         var lat2 = res[i]['coor3'];
@@ -119,53 +122,61 @@ export class MapComponent implements AfterViewInit {
         var d = q.getDay();
         var y = q.getFullYear();
         var date = new Date(y,m,d);
-        console.log(date.getTime());
+        //console.log(date.getTime());
         var zapl = new Date(res[i]['paidBy']);
         var umr = new Date(res[i]['dead']);
+        //console.log("umr", umr);
+        //console.log("zapl", zapl);
+        //console.log("zapl", zapl.getTime());
         var bounds = [[lat1,lon1], [lat2,lon2]];
 
-        //console.log("zapl" ,zapl.getTime());
-        //if(date.getTime()== zapl.getTime()){console.log("porovnanie datumov");}
-        //console.log("umr",umr.getFullYear());
-        if(id == res[i]['id_corpse'] ){
-          var marker = L.rectangle(bounds, {color: "#000000"}).addTo(map);
-          marker.bindPopup("Meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"SOM OZNACENY").openPopup()
-        }
-        else if( !isNaN(zapl.getFullYear()) && !isNaN(umr.getFullYear()) ){
-          console.log("lon1",lon1,"lat1",lat1,"lon2",lon2,"lat2",lat2);
-          console.log("plny zaplateny");
-          if(zapl.getTime() > date.getTime()){
-            var marker = L.rectangle(bounds, {color: "#ffff00", fillOpacity:100}).addTo(map);
-            marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny zaplateny")
-          }
-          else if(zapl.getTime() < date.getTime()){
-            var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
-            marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny nezaplateny")
-          }
-        }
-        else if( isNaN(zapl.getFullYear()) && isNaN(umr.getFullYear()) ){
+        if(id_corpse == null){
           console.log("prazdny volny");
           var marker = L.rectangle(bounds, {color: "#00ff00", fillOpacity:100}).addTo(map);
           marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"prazdny volny")
         }
-        else if( !isNaN(zapl.getFullYear()) && isNaN(umr.getFullYear()) ){
-         console.log("prazdny zaplateny");
-         if(zapl.getTime() > date.getTime()){
-          var marker = L.rectangle(bounds, {color: "#ff0066", fillOpacity:100}).addTo(map);
-          marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"volny zaplateny")
+        else{
+          if(id == res[i]['id_corpse'] ){
+            console.log("ID OZN" ,res[i]['id_grave']);
+            var marker = L.rectangle(bounds, {color: "#000000"}).addTo(map);
+            marker.bindPopup("Meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"SOM OZNACENY").openPopup()
           }
-          else if(zapl.getTime() < date.getTime()){
-          var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
-          marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny nezaplateny")
+          else if( !isNaN(zapl.getFullYear()) && !isNaN(umr.getFullYear()) ){
+            console.log("lon1",lon1,"lat1",lat1,"lon2",lon2,"lat2",lat2);
+            console.log("plny zaplateny");
+            if(zapl.getTime() > date.getTime()){
+              var marker = L.rectangle(bounds, {color: "#ffff00", fillOpacity:100}).addTo(map);
+              marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny zaplateny")
+            }
+            else if(zapl.getTime() < date.getTime()){
+              var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
+              marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny nezaplateny")
+            }
           }
+          else if( isNaN(zapl.getFullYear()) && isNaN(umr.getFullYear()) ){
+            console.log("prazdny volny");
+            var marker = L.rectangle(bounds, {color: "#00ff00", fillOpacity:100}).addTo(map);
+            marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"prazdny volny")
+          }
+          else if( !isNaN(zapl.getFullYear()) && isNaN(umr.getFullYear()) ){
+           console.log("prazdny zaplateny");
+           if(zapl.getTime() > date.getTime()){
+            var marker = L.rectangle(bounds, {color: "#ff0066", fillOpacity:100}).addTo(map);
+            marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"volny zaplateny")
+            }
+            else if(zapl.getTime() < date.getTime()){
+            var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
+            marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny nezaplateny")
+            }
+          }
+          else if( isNaN(zapl.getFullYear()) && !isNaN(umr.getFullYear()) ){
+            //console.log("plny nezaplateny");
+            var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
+            marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny nezaplateny")
+          } 
         }
-        else if( isNaN(zapl.getFullYear()) && !isNaN(umr.getFullYear()) ){
-          //console.log("plny nezaplateny");
-          var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
-          marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny nezaplateny")
-        } 
         i++;
-      }
+      } 
     });
   } 
 
@@ -178,14 +189,14 @@ export class MapComponent implements AfterViewInit {
     var i = 0;
     this.http.get(this.apiUrl).subscribe((res: any) =>{
       for(const c of res){
-        console.log(res[i]['lastname']);
+       // console.log(res[i]['lastname']);
         var priezvisko = res[i]['lastname'].normalize("NFD").replace(/[\u0300-\u036f]/g, "");
         var hladaniePriezvisko = data['lastname'].normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-        console.log(hladaniePriezvisko);
-        console.log(priezvisko);
+       // console.log(hladaniePriezvisko);
+      //  console.log(priezvisko);
         if(priezvisko.toUpperCase() == hladaniePriezvisko.toUpperCase()){
           var id = res[i]['id_corpse'];
-          console.log("rovna sa", id);
+        //  console.log("rovna sa", id);
           this.removeMap();
           this.initMap(id);
         }
@@ -193,7 +204,7 @@ export class MapComponent implements AfterViewInit {
         i++;
       }
     });
-    console.log("poslane data" ,data['lastname']);
+   // console.log("poslane data" ,data['lastname']);
   }
 
 
