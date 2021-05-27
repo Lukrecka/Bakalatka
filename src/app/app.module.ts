@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { InfoComponent } from './info/info.component';
 import { AdminBoardComponent } from './admin-board/admin-board.component';
 import { UserBoardComponent } from './user-board/user-board.component';
+import { BuyGraveComponent } from './buy-grave/buy-grave.component';
+import { PaymentGateComponent } from './payment-gate/payment-gate.component';
 //import { ApiService } from './_services/api.service';
 
 @NgModule({
@@ -24,6 +26,8 @@ import { UserBoardComponent } from './user-board/user-board.component';
     InfoComponent,
     AdminBoardComponent,
     UserBoardComponent,
+    BuyGraveComponent,
+    PaymentGateComponent,
    // ApiService
   ],
   imports: [
@@ -32,7 +36,7 @@ import { UserBoardComponent } from './user-board/user-board.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [BuyGraveComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

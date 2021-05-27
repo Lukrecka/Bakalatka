@@ -16,6 +16,7 @@ export class RegistrationComponent implements OnInit {
     this.ApiService.readValues().subscribe((registrations: Registration[])=>{
       this.registrations = registrations;
       //console.log(this.registrations);
+      console.log('id', this.ApiService.LoginID);
     }) 
   }
 

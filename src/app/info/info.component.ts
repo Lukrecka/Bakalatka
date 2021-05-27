@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../_services/api.service';
 
 @Component({
   selector: 'app-info',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InfoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private ApiService: ApiService) { }
 
+  public loginID;
   ngOnInit(): void {
+    this.loginID = this.ApiService.LoginID;
+    console.log('id', this.ApiService.LoginID);
+  }
+
+  logout(){
+    this.ApiService.logOut();
   }
 
 }

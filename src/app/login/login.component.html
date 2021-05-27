@@ -8,6 +8,7 @@
             <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
             <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
           </ul>
+          <button  style="float:right" *ngIf="loginID > 0 || loginID == 0" (click)="logout()">Odhlasenie</button>
       </nav>
     </div>
     <div class="form">

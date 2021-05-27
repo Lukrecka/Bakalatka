@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Registration } from '../class/registration';
+import { BuyGrave, Registration } from '../class/registration';
 import { Login, Payment } from '../class/Login';
 import {Observable} from 'rxjs';
 import {Router} from '@angular/router'; 
 import { Cemetery, Corpses } from '../class/Cemetery';
+import { BuyGraveComponent } from '../buy-grave/buy-grave.component';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,8 +20,12 @@ export class ApiService {
   [x: string]: any;
   serverData: any;
 
-  private apiUrl =  'http://localhost/api.php/';
-  private LoginID = -1;
+  private apiUrl =  'http://localhost/login/api.php/';
+  private urlBuyNew = 'http://localhost/login/buyGraveNew.php';
+  private urlBuyOld = 'http://localhost/login/buyGraveOld.php';
+  public LoginID = -1;
+  public GraveID = -1;
+  public newOld = -1;
   constructor(private http: HttpClient,
     private router: Router) {
 
@@ -32,53 +37,53 @@ export class ApiService {
   }
 
   readCemetery(): Observable<Cemetery[]>{
-    return this.http.get<Cemetery[]>(`http://localhost/readAdminCemetery.php/`);
+    return this.http.get<Cemetery[]>(`http://localhost/readAdmin/readAdminCemetery.php/`);
   }
 
   readCorpses(): Observable<Corpses[]>{
-    return this.http.get<Corpses[]>(`http://localhost/readAdminCorpses.php`);
+    return this.http.get<Corpses[]>(`http://localhost/readAdmin/readAdminCorpses.php`);
   }
   readUsers(): Observable<Registration[]>{
-    return this.http.get<Registration[]>(`http://localhost/readAdminUsers.php`);
+    return this.http.get<Registration[]>(`http://localhost/readAdmin/readAdminUsers.php`);
   }
   readPayment(): Observable<Payment[]>{
-    return this.http.get<Payment[]>(`http://localhost/readAdminPayment.php`);
+    return this.http.get<Payment[]>(`http://localhost/readAdmin/readAdminPayment.php`);
   }
 
   // DELETE from charts ADMIN
 deleteSom(id: number,type: string){
   console.log("daco",id, type);
-  return this.http.delete(`http://localhost/delete.php/?id=${id}&type=${type}`);
+  return this.http.delete(`http://localhost/adminCRUD/delete.php/?id=${id}&type=${type}`);
 }
 
 //UPDATE or CREATE record ADMIN
 updateUser(registration: Registration){
   console.log("api reg", registration);
-  return this.http.put<Registration>(`http://localhost/updateUser.php`, registration)
+  return this.http.put<Registration>(`http://localhost/adminCRUD/updateUser.php`, registration)
 }
 updateCorpse(corpse: Corpses){
   console.log("api", corpse);
-  return this.http.put<Corpses>(`http://localhost/updateCorpse.php`,corpse);
+  return this.http.put<Corpses>(`http://localhost/adminCRUD/updateCorpse.php`,corpse);
 } 
 createCorpse(corpse: Corpses): Observable<Corpses>{
   console.log("create cor", corpse);
-  return this.http.post<Corpses>(`http://localhost/createCorpse.php`, corpse);
+  return this.http.post<Corpses>(`http://localhost/adminCRUD/createCorpse.php`, corpse);
 }
 updateGrave(cemetery: Cemetery){
   console.log("api", cemetery);
-  return this.http.put<Cemetery>(`http://localhost/updateGrave.php`,cemetery);
+  return this.http.put<Cemetery>(`http://localhost/adminCRUD/updateGrave.php`,cemetery);
 } 
 createGrave(cemetery: Cemetery): Observable<Cemetery>{
   console.log("create cor", cemetery);
-  return this.http.post<Cemetery>(`http://localhost/createGrave.php`, cemetery);
+  return this.http.post<Cemetery>(`http://localhost/adminCRUD/createGrave.php`, cemetery);
 }
 updatePayment(payment: Payment){
   console.log("api", payment);
-  return this.http.put<Payment>(`http://localhost/updatePayment.php`,payment);
+  return this.http.post<Payment>(`http://localhost/adminCRUD/updatePayment.php`,payment);
 } 
 createPayment(payment: Payment): Observable<Payment>{
   console.log("create cor", payment);
-  return this.http.post<Payment>(`http://localhost/createPayment.php`, payment);
+  return this.http.post<Payment>(`http://localhost/adminCRUD/createPayment.php`, payment);
 }
 
 //REGISTRATION users
@@ -131,28 +136,63 @@ return -1;
 
 //LOGOUT
 logOut(){
-  console.log("log out");
   this.router.navigate(['/info']);
   this.LoginID = -1;
-  console.log("api");
+  console.log("log out", this.LoginID);
 
 } 
 
+isLog(){
+  if(this.LoginID > 0){
+    
+  }
+}
+
 //Table / chart for users
+
+readUserProfil(): Observable<Registration[]>{
+  console.log(this.LoginID);
+  return this.http.get<Registration[]>(`http://localhost/user/readProfil.php/?id=${this.LoginID}`);
+}
 
 readUserGraves(): Observable<Cemetery[]>{
   console.log(this.LoginID);
-  return this.http.get<Cemetery[]>(`http://localhost/readUsersGraves.php/?id=${this.LoginID}`);
+  return this.http.get<Cemetery[]>(`http://localhost/user/readUsersGraves.php/?id=${this.LoginID}`);
 }
 
 readUserCorpses(): Observable<Corpses[]>{
   console.log(this.LoginID);
-  return this.http.get<Corpses[]>(`http://localhost/readUsersCorpses.php/?id=${this.LoginID}`);
+  return this.http.get<Corpses[]>(`http://localhost/user/readUsersCorpses.php/?id=${this.LoginID}`);
 }
 
 readUserPayment(): Observable<Payment[]>{
   console.log(this.LoginID);
-  return this.http.get<Payment[]>(`http://localhost/readUsersPayment.php/?id=${this.LoginID}`);
+  return this.http.get<Payment[]>(`http://localhost/user/readUsersPayment.php/?id=${this.LoginID}`);
+}
+
+
+//BUY GRAVE NEW
+buyGrave(userData: BuyGrave): number {
+  console.log(userData);
+  const x = this.http.post(this.urlBuyNew, userData, httpOptions).subscribe(
+    (res) => console.log(res),
+    (err) => console.log(err)
+  );
+  return 1;
+}
+
+contractExtension(userData: BuyGrave): number {
+  console.log(userData);
+  const x = this.http.post(this.urlBuyOld, userData, httpOptions).subscribe(
+    (res) => console.log(res),
+    (err) => console.log(err)
+  );
+  return 1;
+}
+
+updateUserProfile(registration: Registration){
+  console.log("api reg", registration);
+  return this.http.put<Registration>(`http://localhost/user/updateUser.php`, registration)
 }
 
 }

@@ -1,5 +1,38 @@
-<p>Cintorin</p>
-<table border='1' width='100%' style='border-collapse: collapse;'>
+<div class="navBar">
+  <nav>
+      <ul>
+      <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
+        <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
+        <li *ngIf="loginID > 0 || loginID == 0"><a routerLink="/buy-Grave" routerLinkActive="active">Kúpa miesta</a></li>
+        <li *ngIf="loginID == 0"><a routerLink="/adminBoard" routerLinkActive="active">Moja nástenka</a></li>
+      </ul>
+    
+  </nav>
+  <div class="buttons">
+    <button class="sendMails" (click)="sendMails()">Poslat mail</button>
+    <button class="logout" (click)="logout()">Odhlasenie</button>
+  </div>
+  </div>
+<!--
+  <div class="selected" formControlName="replytype" type="text" style="width: 100%;" [(ngModel)]="optionValue">
+    <select>
+      <option value="cemetery">Cintorín</option>
+      <option value="corpses">Zosnulý</option>
+      <option value="users">Používatela</option>
+      <option class="payments">Platby</option>
+    </select>
+  </div>
+
+  <ng-container *ngIf="optionValue == 'opentype'">
+<div class="col-md-12 no-padding">
+              <label>Main Menu</label>
+              <input type="text"class="form-control" id="mainmenu" placeholder="Message Text">
+            </div> 
+</ng-container>
+-->
+<div class="container">
+  <h2>Cintorin</h2>
+<table  border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
       <th>ID miesta</th>
       <th>Súradnica 1</th>
@@ -7,11 +40,13 @@
       <th>Súradnica 3</th>
       <th>Súradnica 4</th>
       <th>Typ miesta</th>
+      <th></th>
   
     </tr>
   
     <tr *ngFor="let cemetery of cemetery">
       <td>{{ cemetery.id_grave }}</td>
+      <td>{{ cemetery.id_user }}</td>
       <td>{{ cemetery.coor1 }}</td>
       <td>{{ cemetery.coor2 }}</td>
       <td>{{ cemetery.coor3 }}</td>
@@ -27,6 +62,8 @@
     <form #formGrave = "ngForm">
       <label>Id hrob</label>
       <input type="number" name="id_grave" [(ngModel)] = "selectedGrave.id_grave">
+      <label>Id užívateľa</label>
+      <input type="number" name="id_user" [(ngModel)] = "selectedGrave.id_user">
       <label>Sur1</label>
       <input type="text" name="coor1" [(ngModel)] = "selectedGrave.coor1">
       <label>Sur2</label>
@@ -43,7 +80,7 @@
     </form>
   </div>
 
-  <p>Zosnuly</p>
+  <h2>Zosnuly</h2>
   <table border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
       <th>ID zosnuleho</th>
@@ -53,6 +90,7 @@
       <th>Datum narodenia</th>
       <th>Datum umrtia</th>
       <th>Datum zaplatene do</th>
+      <th></th>
   
     </tr>
   
@@ -85,11 +123,12 @@
       <label>Zaplatené do</label>
       <input type="text" name="paidBy" [(ngModel)] = "selectedCorpse.paidBy">
       <input type="button" (click)="updateCorpse(formCorpse)" value="Update">
+      <input type="button" (click)="createCorpse(formGrave)" value="Create">
       
     </form>
   </div>
 
-  <p>Uzivatelia</p>
+  <h2>Uzivatelia</h2>
   <table border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
       <th>ID uzivatela</th>
@@ -99,6 +138,11 @@
       <th>Tel. cislo</th>
       <th>email</th>
       <th>heslo</th>
+      <th>Obec</th>
+      <th>Ulica</th>
+      <th>Číslo domu</th>
+      <th>PSČ</th>
+      <th></th>
   
     </tr>
   
@@ -110,6 +154,10 @@
       <td>{{ registration.number }}</td>
       <td>{{ registration.email }}</td>
       <td>{{ registration.password }}</td>
+      <td>{{ registration.town }}</td>
+      <td>{{ registration.street }}</td>
+      <td>{{ registration.number_house }}</td>
+      <td>{{ registration.postcode }}</td>
       <td>
         <button (click)="delete(registration.id_user,'user')">Delete</button>
         <button (click)="selectUser(registration)">Update</button>
@@ -129,18 +177,27 @@
       <input type="text" name="number" [(ngModel)] = "selectedUser.number">
       <label>Email</label>
       <input type="text" name="email" [(ngModel)] = "selectedUser.email">
+      <label>Mesto</label>
+      <input type="text" name="town" [(ngModel)] = "selectedUser.town">
+      <label>Ulica</label>
+      <input type="text" name="street" [(ngModel)] = "selectedUser.street">
+      <label>Číslo domu</label>
+      <input type="text" name="number_house" [(ngModel)] = "selectedUser.number_house">
+      <label>PSČ</label>
+      <input type="text" name="postcode" [(ngModel)] = "selectedUser.postcode">
       <input type="button" (click)="updateUser(formUser)" value="Update">
     </form>
   </div>
 
 
-  <p>Platby</p>
+  <h2>Platby</h2>
   <table border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
       <th>ID uzivatela</th>
       <th>Id hrob</th>
       <th>Den zaplatenia</th>
       <th>typ miesta</th>
+      <th></th>
     </tr>
   
     <tr *ngFor="let payment of payment">
@@ -168,3 +225,5 @@
       <input type="button" (click)="createPayment(formPayment)" value="Create">
     </form>
   </div>
+
+</div>

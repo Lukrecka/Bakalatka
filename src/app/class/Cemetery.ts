@@ -1,6 +1,7 @@
 export class Cemetery {
 
   id_grave: number;
+  id_user: number;
   coor1: number;
   coor2: number;
   coor3: number;

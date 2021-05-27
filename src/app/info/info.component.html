@@ -2,10 +2,14 @@
     <nav>
         <ul>
         <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
-          <li><a routerLink="/login" routerLinkActive="active">Prihlásenie</a></li>
-          <li><a routerLink="/registration" routerLinkActive="active">Registrácia</a></li>
+          <li *ngIf="loginID == -1"><a routerLink="/login" routerLinkActive="active">Prihlásenie</a></li>
+          <li *ngIf="loginID == -1"><a routerLink="/registration" routerLinkActive="active">Registrácia</a></li>
           <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
+          <li *ngIf="loginID > 0 || loginID == 0"><a routerLink="/buy-Grave" routerLinkActive="active">Kúpa miesta</a></li>
+          <li *ngIf="loginID == 0"><a routerLink="/adminBoard" routerLinkActive="active">Moja nástenka</a></li>
+          <li *ngIf="loginID > 0"><a routerLink="/userBoard" routerLinkActive="active">Moja nástenka</a></li>
         </ul>
+        <button *ngIf="loginID > 0 || loginID == 0" (click)="logout()">Odhlasenie</button>
     </nav>
  </div>
 <div class="introduction">
@@ -20,4 +24,5 @@
     <h4>telefónne číslo</h4>
     <p>+421948 123 974</p>
     <p>cintorin.topolnica@gmail.com</p>
+    <p>{{loginID}}</p>
 </div>

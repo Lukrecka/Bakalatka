@@ -7,6 +7,10 @@ export class Registration {
   email: string;
   password: string;
   number: string;
+  town: string;
+  street: string;
+  number_house: string;
+  postcode: string;
 
 }
 
@@ -21,4 +25,10 @@ export class Payment{
   id_grave: number;
   paidDay: Date;
   type: string;
+}
+
+export class BuyGrave{
+  id_user: number;
+  id_grave: number;
+ // paidDate: Date;
 }

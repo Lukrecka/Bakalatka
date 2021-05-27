@@ -2,8 +2,9 @@ import { Component, AfterViewInit } from '@angular/core';
 import * as L from 'leaflet';
 
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { Cemetery } from '../class/Cemetery';
+import { Cemetery, Corpses } from '../class/Cemetery';
 import { MapService } from '../_services/map.service';
+import { ApiService } from '../_services/api.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -25,8 +26,11 @@ export class MapComponent implements AfterViewInit {
   corpses: Cemetery[];
   
   constructor(private http: HttpClient,
-    private MapService: MapService) { }
+    private MapService: MapService,
+    private ApiService: ApiService) { }
+    public loginID;
   ngAfterViewInit(): void {
+    this.loginID = this.ApiService.LoginID;
     this.initMap(0);
   }
 
@@ -99,6 +103,7 @@ export class MapComponent implements AfterViewInit {
 
 
 
+
   makeMarkers(map: L.map, id): void {
     var greenIcon = L.icon({
       iconUrl: 'http://ukazcicky.mywire.org/cintorin/rip.jpg',
@@ -108,10 +113,11 @@ export class MapComponent implements AfterViewInit {
   });
     var i=0;
     this.http.get(this.apiUrl).subscribe((res: any) =>{
+      var isPaid: Corpses[] = [];
+      var notPaid: Corpses[] = [];
       for(const c of res){;
         //console.log("ID corpse" ,res[i]['id_corpse']);
         //console.log("ID grave" ,res[i]['id_grave']);
-
         var id_corpse = res[i]['id_corpse'];
         var lat1 = res[i]['coor1'];
         var lon1 = res[i]['coor2'];
@@ -129,11 +135,12 @@ export class MapComponent implements AfterViewInit {
         //console.log("zapl", zapl);
         //console.log("zapl", zapl.getTime());
         var bounds = [[lat1,lon1], [lat2,lon2]];
-
+        
         if(id_corpse == null){
           console.log("prazdny volny");
           var marker = L.rectangle(bounds, {color: "#00ff00", fillOpacity:100}).addTo(map);
           marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"prazdny volny")
+
         }
         else{
           if(id == res[i]['id_corpse'] ){
@@ -145,8 +152,9 @@ export class MapComponent implements AfterViewInit {
             console.log("lon1",lon1,"lat1",lat1,"lon2",lon2,"lat2",lat2);
             console.log("plny zaplateny");
             if(zapl.getTime() > date.getTime()){
-              var marker = L.rectangle(bounds, {color: "#ffff00", fillOpacity:100}).addTo(map);
-              marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny zaplateny")
+              isPaid.push(res[i]);
+              //var marker = L.rectangle(bounds, {color: "#ffff00", fillOpacity:100}).addTo(map);
+              //marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny zaplateny")
             }
             else if(zapl.getTime() < date.getTime()){
               var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
@@ -177,6 +185,22 @@ export class MapComponent implements AfterViewInit {
         }
         i++;
       } 
+      console.log(isPaid.length);
+// viac ako jeden mrtvy v hrobe
+      var a: any[] = [];
+      
+      for (i = 0; i < isPaid.length; i++) {
+         a.push( `
+              <table  border='1' width='100%' style='border-collapse: collapse;'>
+             <td>`+ isPaid[i]['name'] + `</td>
+            <td> ` +isPaid[i]['lastname'] + `</td>
+             </tr>
+          </table>`)
+      }
+    
+  var marker = L.rectangle(bounds, {color: "#ffff00", fillOpacity:100}).addTo(map);
+     marker.bindPopup("meno: " + a + "plny zaplateny")
+
     });
   } 
 
@@ -210,6 +234,10 @@ export class MapComponent implements AfterViewInit {
 
   sendMails():void{
     this.MapService.sendMails().subscribe((res: any) =>{});
+  }
+
+  logout(){
+    this.ApiService.logOut();
   }
 
 }

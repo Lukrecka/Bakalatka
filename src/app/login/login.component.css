@@ -6,6 +6,8 @@ body{
 }
 
 #wrap{
+    height: 100%;
+    width: 100%;
     position: relative;
      z-index: 2;
 }
@@ -19,6 +21,7 @@ body{
     z-index: -1;
   }
   #bg img {
+    background-image: url("../cintorin.jpg");
     position: absolute; 
     top: 0; 
     left: 0; 
@@ -31,32 +34,29 @@ body{
 
 .form{
     box-shadow: 0.7vw 0.9vw rgba(0, 0, 0, 0.5);
-    width: 50vw;
-    height: 33vw;
-    margin-left: 15vw;
-    margin-top: 5vw;
+    width: 50%;
+    height: 100%;
+    margin-left: 25%;
+    margin-top: 10%;
     background-color: rgb(250, 249, 249);
     border: 0.2vw solid;
-    border-radius: 3vw;
+    border-radius: 5%;
     text-align: center;
 }
 .title{
-    margin-top: 5vw;
-    font-size: 2 vw;
+    margin-top: 5%;
     color: black;
     font-family: "Times New Roman", Times, serif;
-    margin-bottom: 5vw;
+    margin-bottom: 5%;
 }
 label{
-    margin-top: 1vw;
-    font-size: 1vw;
+    margin-top: 5%;
     color:  #474747;
     font-family: "Times New Roman", Times, serif;
 }
 input{
-    margin-top: 1vw;
-    margin-left: 1vw;
-    font-size: 1vw;
+    margin-top: 5%;
+    margin-left: 5%;
     color: black;
     font-family: "Times New Roman", Times, serif;
 }
@@ -93,9 +93,10 @@ li a:hover {
   }
 
   button {
-    margin-top: 1vw;
+    margin-bottom: 10%;
+    margin-top: 5%;
     background-color: #000059;
-    border-radius: 0.5vw;
+    border-radius: 5%;
     color: white;
     padding: 15px 32px;
     text-align: center;
@@ -103,3 +104,15 @@ li a:hover {
     font-size: 16px;
     cursor: pointer;
   }
+
+  @media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  [class*="wrap"] {
+    width: 100%;
+  }
+
+  [class*="form"] {
+    width: 70%;
+  }
+
+}

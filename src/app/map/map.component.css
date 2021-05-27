@@ -19,6 +19,7 @@ body{
     z-index: -1;
   }
   #bg img {
+    background-image: url("../cintorin.jpg");
     position: absolute; 
     top: 0; 
     left: 0; 
@@ -28,12 +29,21 @@ body{
     min-width: 50%;
     min-height: 50%;
   }
+
+.a{
+    margin-left: 1.5vw;
+}
+.subtitle{
+    margin-top: 1vw;
+}
+.daco{
+    float: left;
+}
 .box {
-    border-radius: 0.vw;
     float: left;
     width: 1vw;
     height: 1vw;
-    margin-right: 1.5vw;
+    margin-right: 1vw;
 }
 .container{
     overflow: hidden;
@@ -42,51 +52,46 @@ body{
 }
 .legend{
     float: left;
+    margin-top: 3vw;
     background-color: rgb(250, 249, 249);
     box-shadow: 0.7vw 1vw rgba(0, 0, 0, 0.5);
-    border-radius: 3vw;
-    margin-top: 5.5vw;
-    margin-left: 3vw;
+    border-radius: 3%;
     border: 2px solid black;
-    height: 30vw;
-    width: 20vw;
-}
-.a{
-    margin-left: 1.5vw;
-    margin-top: 8vw;
+    height: 20vw;
+    width: 17vw;
 }
 .map-container{
     overflow: hidden;
-    margin-top: 5.5vw;
-    border-radius: 3vw;
+    margin-top: 1vw;
+    border-radius: 3%;
     box-shadow: 0.7vw 1vw rgba(0, 0, 0, 0.5);
-    margin-left: 30vw;
+    margin-left: 20vw;
     border: 2px solid black;
-    height: 30vw;
-    width: 60%;
+    height: 38vw;
+    width: 70%;
 }
 .map-frame{
     border: 2px solid black;
     box-shadow: 0.7vw 1vw rgba(0, 0, 0, 0.5);
-    border-radius: 1.5vw;
+    border-radius: 3%;
     height: 100%;
     width: 100%;
 }
 
 #map{
-    border-radius: 1.5vw;
+    border-radius: 3%;
     height: 100%;
 }
 
 .form{
+
     box-shadow: 0.7vw 0.9vw rgba(0, 0, 0, 0.5);
-    width: 40vw;
-    height: 4vw;
-    margin-left: 25vw;
-    margin-top: 2vw;
+    width: 15vw;
+    height: 8vw;
+    margin-top: 5vw;
     background-color: rgb(250, 249, 249);
     border: 0.2vw solid;
-    border-radius: 1.5vw;
+    border-radius: 3%;
     text-align: center;
 }
 
@@ -98,13 +103,15 @@ body{
     margin-bottom: 5vw;
 }
 .subtitle{
+    margin-bottom: 2vw;
+    margin-top: 1vw;
     font-size: 30px;
     color: black;
     font-family: "Times New Roman", Times, serif;
 
 }
 label{
-    margin-top: 1vw;
+    margin-top: 3vw;
     font-size: 1vw;
     color:  #474747;
     font-family: "Times New Roman", Times, serif;
@@ -160,3 +167,41 @@ li a:hover {
     font-size: 16px;
     cursor: pointer;
   }
+
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="wrap"] {
+      width: 100%;
+    }
+  
+    [class*="form"] {
+      width: 50%;
+    }
+    [class*="map-container"] {
+        width: 100%;
+      }
+    
+      [class*="map-frame"] {
+        width: 70%;
+      }
+      [class*="map"] {
+        width: 100%;
+      }
+      [class*="container"] {
+        width: 100%;
+      }
+      [class*="legend"] {
+        width: 100%;
+      }
+      [class*="box"] {
+        width: 10%;
+      }
+      [class*="p"] {
+        width: 50%;
+      }
+    [class*="subtitle"] {
+      width: 10%;
+    }
+      
+
+  }  

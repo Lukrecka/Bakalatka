@@ -42,12 +42,35 @@
           <input ngModel minlength="3" name="number" class="form-control" id="number" type="text" #number="ngModel">
           <div class="alert alert-danger" *ngIf="!number.valid && number.touched">Prázdne políčko</div>
         </div>
+        <div class="address">
+          <div>
+            <label for="town">Mesto</label>
+            <input ngModel minlength="1" name="town" class="form-control" id="town" type="text" #town="ngModel">
+            <div class="alert alert-danger" *ngIf="!town.valid && town.touched">Prázdne políčko</div>
+          </div>
+          <div>
+            <label for="street">Ulica</label>
+            <input ngModel minlength="0" name="street" class="form-control" id="street" type="text" #street="ngModel">
+            <div class="alert alert-danger" *ngIf="!street.valid && street.touched">Prázdne políčko</div>
+          </div>
+          <div>
+            <label for="number_house">Číslo domu</label>
+            <input ngModel minlength="1" name="number_house" class="form-control" id="number_house" type="text" #number_house="ngModel">
+            <div class="alert alert-danger" *ngIf="!number_house.valid && number_house.touched">Prázdne políčko</div>
+          </div>
+          <div>
+            <label for="postcode">PSČ</label>
+            <input ngModel minlength="5" name="postcode" class="form-control" id="postcode" type="text" #postcode="ngModel">
+            <div class="alert alert-danger" *ngIf="!postcode.valid && postcode.touched">Prázdne políčko</div>
+          </div>
+          
+        </div>
         <button class="btn btn-default" [disabled]="form.invalid" >Odoslať</button>
       </form>
     </div>
   </div>
 
   <div id="bg">
-    <img src="../cintorin.jpg" alt="">
+    <img src="./cintorin.jpg" alt="">
   </div>
 </body>
