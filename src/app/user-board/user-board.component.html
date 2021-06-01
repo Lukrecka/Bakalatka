@@ -6,8 +6,8 @@
         <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
         <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
         <li *ngIf="loginID > 0 || loginID == 0"><a routerLink="/buy-Grave" routerLinkActive="active">Kúpa miesta</a></li>
+        <button (click)="logout()">Odhlasenie</button>
       </ul>
-      <button (click)="logout()">Odhlasenie</button>
   </nav>
 </div>
  
@@ -16,12 +16,10 @@
   <table border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
       <th>ID uzivatela</th>
-      <th>Id hrob</th>
       <th>Meno</th>
       <th>Priezvisko</th>
       <th>Tel. cislo</th>
       <th>email</th>
-      <th>heslo</th>
       <th>Obec</th>
       <th>Ulica</th>
       <th>Číslo domu</th>
@@ -32,31 +30,27 @@
   
     <tr *ngFor="let registration of registration">
       <td>{{ registration.id_user }}</td>
-      <td>{{ registration.id_grave }}</td>
       <td>{{ registration.name }}</td>
       <td>{{ registration.lastname }}</td>
       <td>{{ registration.number }}</td>
       <td>{{ registration.email }}</td>
-      <td>{{ registration.password }}</td>
       <td>{{ registration.town }}</td>
       <td>{{ registration.street }}</td>
       <td>{{ registration.number_house }}</td>
       <td>{{ registration.postcode }}</td>
       <td>
-        <button (click)="selectUser(registration)">Update</button>
+        <button (click)="selectUser(registration)">Aktualizovať</button>
       </td>
     </tr>
   </table>
 
-  <div class="updateUser">
+  <div *ngIf="update == 1"  class="updateUser">
     <form #formUser = "ngForm">
-      <label>Id hrob</label>
-      <input type="number" name="id_grave" [(ngModel)] = "selectedUser.id_grave">
-      <label>meno</label>
+      <label>Meno</label>
       <input type="text" name="name" [(ngModel)] = "selectedUser.name">
-      <label>priezvisko</label>
+      <label>Priezvisko</label>
       <input type="text" name="lastname" [(ngModel)] = "selectedUser.lastname">
-      <label>Tel</label>
+      <label>Telefónne číslo</label>
       <input type="text" name="number" [(ngModel)] = "selectedUser.number">
       <label>Email</label>
       <input type="text" name="email" [(ngModel)] = "selectedUser.email">
@@ -68,7 +62,7 @@
       <input type="text" name="number_house" [(ngModel)] = "selectedUser.number_house">
       <label>PSČ</label>
       <input type="text" name="postcode" [(ngModel)] = "selectedUser.postcode">
-      <input type="button" (click)="updateUser(formUser)" value="Update">
+      <input class="update" type="button" (click)="updateUser(formUser)"  (click)="reset()" value="Aktualizovať">
     </form>
   </div>
 
@@ -85,7 +79,7 @@
   <tr *ngFor="let cemetery of cemetery">
     <td>{{ cemetery.id_grave }}</td>
     <td>{{ cemetery.type }}</td>
-    <td><button (click)="selectIDGrave(cemetery.id_grave)">Kúp</button></td>
+    <td><button (click)="selectIDGrave(cemetery.id_grave)">Predĺžiť</button></td>
   </tr>
 </table>
 

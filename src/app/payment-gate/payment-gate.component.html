@@ -1,8 +1,89 @@
-<p>payment-gate works!</p>
-<div class="paypalDiv">
-    <p>PayPal</p>
-<div id="myPaypalButtons" ></div>
-<script src="https://www.paypal.com/sdk/js?client-id=AULui0Waj2W0GhbKxkHTylA3hlo-ucI_2Fd6Kk3EVtzNKCHvpvW2OB_W2uElLzQc5CMnknwMouvxnROf"></script>
-<input type="number"[(ngModel)]="finalAmount">
-<div id="paypal-checkout-btn"></div>
-</div>
+<body>
+
+    <div class="navBar">
+        <nav>
+            <ul>
+              <li *ngIf="loginID > 0"><a routerLink="/userBoard" routerLinkActive="active">Moja nástenka</a></li>
+              <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
+              <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
+              <li *ngIf="loginID > 0 || loginID == 0"><a routerLink="/buy-Grave" routerLinkActive="active">Kúpa miesta</a></li>
+              <button (click)="logout()">Odhlasenie</button>
+            </ul>
+        </nav>
+      </div>
+
+    <div class="container">
+        <h2>Moje údaje </h2>
+        <table style="width:100%">
+            <tr *ngFor="let registration of registration">
+              <th>Meno:</th>
+              <td>{{ registration.name }}</td>
+            </tr>
+            <tr *ngFor="let registration of registration">
+              <th>Priezvisko:</th>
+              <td>{{ registration.lastname }}</td>
+            </tr>
+            <tr *ngFor="let registration of registration">
+              <th>Telefónne číslo:</th>
+              <td>{{ registration.number }}</td>
+            </tr>
+            <tr *ngFor="let registration of registration">
+                <th>Email:</th>
+                <td>{{ registration.email }}</td>
+              </tr>
+              <tr *ngFor="let registration of registration">
+                <th>Obec:</th>
+                <td>{{ registration.town }}</td>
+              </tr>
+              <tr *ngFor="let registration of registration">
+                <th>Ulica:</th>
+                <td>{{ registration.street }}</td>
+              </tr>
+              <tr *ngFor="let registration of registration">
+                <th>Číslo domu:</th>
+                <td>{{ registration.number_house }}</td>
+              </tr>
+              <tr *ngFor="let registration of registration">
+                <th>PSČ:</th>
+                <td>{{ registration.postcode }}</td>
+              </tr>
+              <tr>
+                <th>ID hrobového miesta</th>
+                <td>{{ graveID }}</td>
+              </tr>
+              <tr  *ngFor="let registration of registration">
+                  <th></th>
+                  <td> <button  (click)="selectUser(registration)">Aktualizovať profil</button></td>
+              </tr>
+          </table>
+    </div>
+
+    <div *ngIf="update == 1"  class="updateUser" class="updateUser">
+        <form #formUser = "ngForm">
+          <label>Meno</label>
+          <input type="text" name="name" [(ngModel)] = "selectedUser.name">
+          <label>Priezvisko</label>
+          <input type="text" name="lastname" [(ngModel)] = "selectedUser.lastname">
+          <label>Telefónne číslo</label>
+          <input type="text" name="number" [(ngModel)] = "selectedUser.number">
+          <label>Email</label>
+          <input type="text" name="email" [(ngModel)] = "selectedUser.email">
+          <label>Mesto</label>
+          <input type="text" name="town" [(ngModel)] = "selectedUser.town">
+          <label>Ulica</label>
+          <input type="text" name="street" [(ngModel)] = "selectedUser.street">
+          <label>Číslo domu</label>
+          <input type="text" name="number_house" [(ngModel)] = "selectedUser.number_house">
+          <label>PSČ</label>
+          <input type="text" name="postcode" [(ngModel)] = "selectedUser.postcode">
+          <input class="update" type="button" (click)="updateUser(formUser)" value="Aktualizovať">
+        </form>
+      </div>
+
+    <div class="paypalDiv">
+        <p>PayPal</p>
+    <div id="myPaypalButtons" ></div>
+    <script src="https://www.paypal.com/sdk/js?client-id=AULui0Waj2W0GhbKxkHTylA3hlo-ucI_2Fd6Kk3EVtzNKCHvpvW2OB_W2uElLzQc5CMnknwMouvxnROf"></script>
+    <div id="paypal-checkout-btn"></div>
+    </div>
+</body>

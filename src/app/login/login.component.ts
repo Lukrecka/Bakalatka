@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   [x: string]: any;
 
   constructor(private ApiService: ApiService) { }
+  
   ngOnInit(): void {
    console.log('id', this.ApiService.LoginID);
   }

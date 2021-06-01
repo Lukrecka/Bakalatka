@@ -82,6 +82,8 @@ export class BuyGraveComponent implements OnInit {
 
         var id_corpse = res[i]['id_corpse'];
         var id_grave = res[i]['id_grave'];
+        var id_user =  res[i]['id_user'];
+
         var lat1 = res[i]['coor1'];
         var lon1 = res[i]['coor2'];
         var lat2 = res[i]['coor3'];
@@ -94,10 +96,10 @@ export class BuyGraveComponent implements OnInit {
         marker.bindPopup("id" + res[i]['id_grave']).openPopup();
        }
        
-       if(id_corpse == null){
+       if(id_user == 0){
           
           console.log("prazdny volny");
-          var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
+          var marker = L.rectangle(bounds, {color: "#e60000", fillOpacity:100}).addTo(map);
           marker.bindPopup("ID Miesta: " + res[i]['id_grave'] + '<br/>'+  '<button (click)="selectId()">Update</button' +"Voľné miesto") 
 
           /*

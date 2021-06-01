@@ -5,33 +5,26 @@
         <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
         <li *ngIf="loginID > 0 || loginID == 0"><a routerLink="/buy-Grave" routerLinkActive="active">Kúpa miesta</a></li>
         <li *ngIf="loginID == 0"><a routerLink="/adminBoard" routerLinkActive="active">Moja nástenka</a></li>
+        <button class="sendMails" (click)="sendMails()">Poslat mail</button>
+        <button class="logout" (click)="logout()">Odhlasenie</button>
+        <button (click)="chooseCreate()">Vytvoriť záznam</button>
       </ul>
     
   </nav>
-  <div class="buttons">
-    <button class="sendMails" (click)="sendMails()">Poslat mail</button>
-    <button class="logout" (click)="logout()">Odhlasenie</button>
-  </div>
-  </div>
-<!--
-  <div class="selected" formControlName="replytype" type="text" style="width: 100%;" [(ngModel)]="optionValue">
-    <select>
-      <option value="cemetery">Cintorín</option>
-      <option value="corpses">Zosnulý</option>
-      <option value="users">Používatela</option>
-      <option class="payments">Platby</option>
-    </select>
   </div>
 
-  <ng-container *ngIf="optionValue == 'opentype'">
-<div class="col-md-12 no-padding">
-              <label>Main Menu</label>
-              <input type="text"class="form-control" id="mainmenu" placeholder="Message Text">
-            </div> 
-</ng-container>
--->
+  <div class="selector">
+    <h3><span>Vyber tabuľku</span></h3>
+    <select (change)="selectChangeHandler($event)" (change)="reset()">
+        <option value="cemetery">Cintorín</option>
+        <option value="corpses">Zosnulý</option>
+        <option value="users">Používatelia</option>
+        <option value="payments">Platby</option>
+    </select>
+  </div>
 <div class="container">
-  <h2>Cintorin</h2>
+  <div *ngIf="selectedTable == 'cemetery'">
+    <h2>Cintorin</h2>
 <table  border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
       <th>ID miesta</th>
@@ -41,7 +34,6 @@
       <th>Súradnica 4</th>
       <th>Typ miesta</th>
       <th></th>
-  
     </tr>
   
     <tr *ngFor="let cemetery of cemetery">
@@ -53,12 +45,12 @@
       <td>{{ cemetery.coor4 }}</td>
       <td>{{ cemetery.type }}</td>
       <td>
-        <button (click)="delete(cemetery.id_grave,'grave')">Delete</button>
-        <button (click)="selectGrave(cemetery)">Update</button>  
+        <button (click)="delete(cemetery.id_grave,'grave')">Vymazať</button>
+        <button (click)="selectGrave(cemetery)" (click)="chooseCreate()">Aktualizovať</button>  
       </td> 
     </tr>
   </table>
-  <div class="graves">
+  <div class="graves" *ngIf="choose == 1">
     <form #formGrave = "ngForm">
       <label>Id hrob</label>
       <input type="number" name="id_grave" [(ngModel)] = "selectedGrave.id_grave">
@@ -74,13 +66,13 @@
       <input type="text" name="coor4" [(ngModel)] = "selectedGrave.coor4">
       <label>Typ</label>
       <input type="text" name="type" [(ngModel)] = "selectedGrave.type">
-      <input type="button" (click)="updateGrave(formGrave)" value="Update">
-      <input type="button" (click)="createGrave(formGrave)" value="Create">
-      
+      <input type="button" (click)="updateGrave(formGrave)" value="Aktualizovať">
+      <input type="button" (click)="createGrave(formGrave)" value="Vytvoriť">
     </form>
   </div>
-
-  <h2>Zosnuly</h2>
+  </div>
+<div *ngIf="selectedTable == 'corpses'">
+  <h2>Zosnulý</h2>
   <table border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
       <th>ID zosnuleho</th>
@@ -103,12 +95,12 @@
       <td>{{ corpses.deadDay }}</td>
       <td>{{ corpses.paidBy }}</td>
       <td>
-        <button (click)="delete(corpses.id_corpse,'corpse')">Delete</button>
-        <button (click)="selectCorpse(corpses)">Update</button>  
+        <button (click)="delete(corpses.id_corpse,'corpse')">Vymazať</button>
+        <button (click)="selectCorpse(corpses)"  (click)="chooseCreate()">Aktualizovať</button>  
       </td> 
     </tr>
   </table>
-  <div class="corpses">
+  <div class="corpses" *ngIf="choose == 1">
     <form #formCorpse = "ngForm">
       <label>Id hrob</label>
       <input type="number" name="id_grave" [(ngModel)] = "selectedCorpse.id_grave">
@@ -122,17 +114,17 @@
       <input type="text" name="deadDay" [(ngModel)] = "selectedCorpse.deadDay">
       <label>Zaplatené do</label>
       <input type="text" name="paidBy" [(ngModel)] = "selectedCorpse.paidBy">
-      <input type="button" (click)="updateCorpse(formCorpse)" value="Update">
-      <input type="button" (click)="createCorpse(formGrave)" value="Create">
-      
+      <input type="button" (click)="updateCorpse(formCorpse)" value="Aktualizovať">
+      <input type="button" (click)="createCorpse(formCorpse)" value="Vytvoriť">
     </form>
   </div>
+</div>
 
+<div *ngIf="selectedTable == 'users'">
   <h2>Uzivatelia</h2>
   <table border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
       <th>ID uzivatela</th>
-      <th>Id hrob</th>
       <th>Meno</th>
       <th>Priezvisko</th>
       <th>Tel. cislo</th>
@@ -148,7 +140,6 @@
   
     <tr *ngFor="let registration of registration">
       <td>{{ registration.id_user }}</td>
-      <td>{{ registration.id_grave }}</td>
       <td>{{ registration.name }}</td>
       <td>{{ registration.lastname }}</td>
       <td>{{ registration.number }}</td>
@@ -159,16 +150,14 @@
       <td>{{ registration.number_house }}</td>
       <td>{{ registration.postcode }}</td>
       <td>
-        <button (click)="delete(registration.id_user,'user')">Delete</button>
-        <button (click)="selectUser(registration)">Update</button>
+        <button (click)="delete(registration.id_user,'user')">Vymazať</button>
+        <button (click)="selectUser(registration)"  (click)="chooseCreate()">Aktualizovať</button>
       </td>
     </tr>
   </table>
 
-  <div class="updateUser">
+  <div class="updateUser" *ngIf="choose == 1">
     <form #formUser = "ngForm">
-      <label>Id hrob</label>
-      <input type="number" name="id_grave" [(ngModel)] = "selectedUser.id_grave">
       <label>meno</label>
       <input type="text" name="name" [(ngModel)] = "selectedUser.name">
       <label>priezvisko</label>
@@ -185,11 +174,12 @@
       <input type="text" name="number_house" [(ngModel)] = "selectedUser.number_house">
       <label>PSČ</label>
       <input type="text" name="postcode" [(ngModel)] = "selectedUser.postcode">
-      <input type="button" (click)="updateUser(formUser)" value="Update">
+      <input  type="button" (click)="updateUser(formUser)" value="Update">
     </form>
   </div>
+</div>
 
-
+<div *ngIf="selectedTable == 'payments'">
   <h2>Platby</h2>
   <table border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
@@ -206,12 +196,12 @@
       <td>{{ payment.paidDay }}</td>
       <td>{{ payment.type }}</td>
       <td>
-        <button (click)="selectPayment(payment)">Update</button>
+        <button (click)="selectPayment(payment)"  (click)="chooseCreate()">Aktualizovať</button>
       </td>
     </tr>
   </table>
 
-  <div class="updatePayment">
+  <div class="updatePayment" *ngIf="choose == 1">
     <form #formPayment = "ngForm">
       <label>Id uzivatela</label>
       <input type="number" name="id_user" [(ngModel)] = "selectedPayment.id_user">
@@ -221,9 +211,10 @@
       <input type="text" name="paidDay" [(ngModel)] = "selectedPayment.paidDay">
       <label>typ miesta</label>
       <input type="text" name="type" [(ngModel)] = "selectedPayment.type">
-      <input type="button" (click)="updatePayment(formPayment)" value="Update">
-      <input type="button" (click)="createPayment(formPayment)" value="Create">
+      <input type="button" (click)="updatePayment(formPayment)" value="Aktualizovať">
+      <input type="button" (click)="createPayment(formPayment)" value="Vytvoriť">
     </form>
   </div>
+</div>
 
 </div>

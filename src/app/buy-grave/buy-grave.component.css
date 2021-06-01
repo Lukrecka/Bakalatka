@@ -1,3 +1,33 @@
+body{
+    width: 80%;
+    height: 100%;
+    margin-left: 10%;
+}
+#wrap{
+    position: relative;
+     z-index: 2;
+}
+
+#bg {
+    position: fixed; 
+    top: -50%; 
+    left: -50%; 
+    width: 200%; 
+    height: 200%;
+    z-index: -1;
+  }
+  #bg img {
+    background-image: url("../cintorin.jpg");
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    margin: auto; 
+    min-width: 50%;
+    min-height: 50%;
+  }
+
 .map-container{
     overflow: hidden;
     margin-top: 5.5vw;
@@ -21,7 +51,110 @@
     height: 100%;
 }
 
-#paypalDiv{
-    width: 15vw;
-    height: 15vw;
+body{
+    width: 80%;
+    height: 100%;
 }
+table {
+    margin-top: 2%;
+    margin-left: 1%;
+    float: left;
+    border-collapse: collapse;
+    width: 30%;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even){background-color: #f2f2f2}
+  tr:nth-child(odd){background-color: #ffffff}
+  
+  th {
+    background-color: #000059;
+    color: white;
+  }
+
+  h2{
+      text-align: center;
+      margin-top: 8%;
+  }
+ 
+  .container{
+    margin-left: 15%;
+    width: 100%;
+    border-radius: 3%;
+}
+
+  ul {
+    font-family: "Times New Roman", Times, serif;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #000059;
+    height: 8w;
+    border-radius: 0.5vw;
+}
+li {
+    float: left;
+}
+li a {
+    font-family: 'Times New Roman', Times, serif;
+    display: block;
+    color: rgb(241, 241, 241);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li a:hover {
+    opacity: 0.5;
+    background-color: #2e2ee2;
+    color: white;
+    border-radius: 0.5vw;
+}
+.active {
+    background-color: #0606aa;
+    border-radius: 1;
+  }
+
+  button {
+    margin-left: 1%;
+    background-color: #04046b;
+    border-radius: 0.5vw;
+    color: white;
+    height: 1.5vw;
+    width: 5vw;
+    text-align: center;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    float: right;
+  }
+
+
+  @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    [class*="wrap"] {
+      width: 100%;
+    }
+  
+    [class*="navbar"] {
+      width: 50%;
+    }
+      [class*="grave"] {
+        width: 100%;
+      }
+      [class*="corpses"] {
+        width: 100%;
+      }
+      [class*="payments"] {
+        width: 100%;
+      }
+      [class*="button"] {
+        width: 10%;
+      }
+}
+
+

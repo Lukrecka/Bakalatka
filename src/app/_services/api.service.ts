@@ -22,7 +22,8 @@ export class ApiService {
 
   private apiUrl =  'http://localhost/login/api.php/';
   private urlBuyNew = 'http://localhost/login/buyGraveNew.php';
-  private urlBuyOld = 'http://localhost/login/buyGraveOld.php';
+  private urlBuyOld = 'http://localhost/login/buyGraveOld.php'
+  private urlPdf = 'http://localhost/pdfGenerator.php';
   public LoginID = -1;
   public GraveID = -1;
   public newOld = -1;
@@ -32,9 +33,6 @@ export class ApiService {
 
   }
 // Table / charts for admin
-  readValues(): Observable<Registration[]>{
-    return this.http.get<Registration[]>(`http://localhost/read.php/`);
-  }
 
   readCemetery(): Observable<Cemetery[]>{
     return this.http.get<Cemetery[]>(`http://localhost/readAdmin/readAdminCemetery.php/`);
@@ -112,7 +110,8 @@ control(res){
 
   }
   else{
-    console.log("zle heslo");
+    this.badPass = 1;
+    alert("Zlé heslo alebo email");
     this.LoginID = res[0]['prihlasenie'];
     return res[0]['prihlasenie'];
   }
@@ -123,7 +122,7 @@ loginrUser(userData: Login): any {
 
 console.log("api ", userData);
 const x = this.http.post(this.apiUrl, userData, httpOptions).subscribe(response => {
-  this.control(response);
+ // this.control(response);
 
   var a = response[0]['prihlasenie'];
   console.log("toto je a ", a);
@@ -184,6 +183,15 @@ buyGrave(userData: BuyGrave): number {
 contractExtension(userData: BuyGrave): number {
   console.log(userData);
   const x = this.http.post(this.urlBuyOld, userData, httpOptions).subscribe(
+    (res) => console.log(res),
+    (err) => console.log(err)
+  );
+  return 1;
+}
+
+pdfGenerate(userData: BuyGrave): number {
+  console.log(userData);
+  const x = this.http.post(this.urlPdf, userData, httpOptions).subscribe(
     (res) => console.log(res),
     (err) => console.log(err)
   );

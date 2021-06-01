@@ -42,25 +42,35 @@ body{
     border: 0.2vw solid;
     border-radius: 5%;
     text-align: center;
+    overflow: hidden;
 }
 .title{
-    margin-top: 5%;
+    margin-top: 3%;
     color: black;
     font-family: "Times New Roman", Times, serif;
-    margin-bottom: 5%;
+    margin-bottom: 3%;
 }
 label{
     width: 100%;
     margin-top: 3%;
-    margin-right: 5%;
-    color:  #474747;
+    margin-bottom: 1%;
+    color:  #181717;
     font-family: "Times New Roman", Times, serif;
+    font-size: 120%;
+    float: left;
+    clear: both;
 }
 input{
-    margin-top: 3%;
-    color: black;
-    font-family: "Times New Roman", Times, serif;
+  color: black;
+  font-family: "Times New Roman", Times, serif;
+  clear: both;
+  border-radius: 0.5vw;
+  font-size: 120%;
+  border: 0;
+  border-bottom: 2px solid black;
+
 }
+
 ul {
     font-family: "Times New Roman", Times, serif;
     list-style-type: none;
@@ -94,7 +104,7 @@ li a:hover {
   }
 
   button {
-    margin-bottom: 10%;
+    margin-bottom: 5%;
     margin-top: 5%;
     background-color: #000059;
     border-radius: 5%;

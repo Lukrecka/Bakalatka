@@ -9,7 +9,7 @@
                 <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
                 <li><a routerLink="/login" routerLinkActive="active">Prihlásenie</a></li>
                 <li><a routerLink="/registration" routerLinkActive="active">Registrácia</a></li>
-                <li><a routerLink="/payment" routerLinkActive="active">payment</a></li>
+               <!-- <li><a routerLink="/payment" routerLinkActive="active">payment</a></li>-->
                 </ul>
                 <button *ngIf="loginID > 0 || loginID == 0" (click)="logout()">Odhlasenie</button>
             </nav>
@@ -17,6 +17,11 @@
 
         <div class="table">
             <table>
+                <tr>
+                    <th>ID hrobu</th>
+                    <th></th>
+                    <th></th>
+                </tr>
                 <tr *ngFor="let cemetery of cemetery">
                     <td>{{ cemetery.id_grave }}</td>
                     <td>
@@ -35,4 +40,7 @@
             </div>
         </div>
     </div>
+    <div id="bg">
+        <img src="../cintorin.jpg" alt="">
+      </div>
 </body>

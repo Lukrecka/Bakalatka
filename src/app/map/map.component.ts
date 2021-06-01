@@ -116,8 +116,8 @@ export class MapComponent implements AfterViewInit {
       var isPaid: Corpses[] = [];
       var notPaid: Corpses[] = [];
       for(const c of res){;
-        //console.log("ID corpse" ,res[i]['id_corpse']);
-        //console.log("ID grave" ,res[i]['id_grave']);
+        console.log("ID corpse" ,res[i]['birthDay']);
+        console.log("ID grave" ,res[i]['deadDay']);
         var id_corpse = res[i]['id_corpse'];
         var lat1 = res[i]['coor1'];
         var lon1 = res[i]['coor2'];
@@ -138,7 +138,7 @@ export class MapComponent implements AfterViewInit {
         
         if(id_corpse == null){
           console.log("prazdny volny");
-          var marker = L.rectangle(bounds, {color: "#00ff00", fillOpacity:100}).addTo(map);
+          var marker = L.rectangle(bounds, {color: "#e60000", fillOpacity:100}).addTo(map);
           marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"prazdny volny")
 
         }
@@ -153,33 +153,33 @@ export class MapComponent implements AfterViewInit {
             console.log("plny zaplateny");
             if(zapl.getTime() > date.getTime()){
               isPaid.push(res[i]);
-              //var marker = L.rectangle(bounds, {color: "#ffff00", fillOpacity:100}).addTo(map);
-              //marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny zaplateny")
+              var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
+              marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname'] + '<br/>'+ "Dát narod: " + res[i]['birth'] + '<br/>'+ "Dát úmrtia: " + res[i]['dead'])
             }
             else if(zapl.getTime() < date.getTime()){
-              var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
+              var marker = L.rectangle(bounds, {color: "#239600", fillOpacity:100}).addTo(map);
               marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny nezaplateny")
             }
           }
           else if( isNaN(zapl.getFullYear()) && isNaN(umr.getFullYear()) ){
             console.log("prazdny volny");
-            var marker = L.rectangle(bounds, {color: "#00ff00", fillOpacity:100}).addTo(map);
+            var marker = L.rectangle(bounds, {color: "#e60000", fillOpacity:100}).addTo(map);
             marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"prazdny volny")
           }
           else if( !isNaN(zapl.getFullYear()) && isNaN(umr.getFullYear()) ){
            console.log("prazdny zaplateny");
            if(zapl.getTime() > date.getTime()){
-            var marker = L.rectangle(bounds, {color: "#ff0066", fillOpacity:100}).addTo(map);
+            var marker = L.rectangle(bounds, {color: "#ff9900", fillOpacity:100}).addTo(map);
             marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"volny zaplateny")
             }
             else if(zapl.getTime() < date.getTime()){
-            var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
+            var marker = L.rectangle(bounds, {color: "#239600", fillOpacity:100}).addTo(map);
             marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny nezaplateny")
             }
           }
           else if( isNaN(zapl.getFullYear()) && !isNaN(umr.getFullYear()) ){
             //console.log("plny nezaplateny");
-            var marker = L.rectangle(bounds, {color: "#000099", fillOpacity:100}).addTo(map);
+            var marker = L.rectangle(bounds, {color: "#239600", fillOpacity:100}).addTo(map);
             marker.bindPopup("meno: " + res[i]['name'] + '<br/>'+ "priezvisko: " + res[i]['lastname']+ '<br/>'+"plny nezaplateny")
           } 
         }
@@ -188,7 +188,7 @@ export class MapComponent implements AfterViewInit {
       console.log(isPaid.length);
 // viac ako jeden mrtvy v hrobe
       var a: any[] = [];
-      
+      /*
       for (i = 0; i < isPaid.length; i++) {
          a.push( `
               <table  border='1' width='100%' style='border-collapse: collapse;'>
@@ -196,10 +196,10 @@ export class MapComponent implements AfterViewInit {
             <td> ` +isPaid[i]['lastname'] + `</td>
              </tr>
           </table>`)
-      }
+      } */
     
-  var marker = L.rectangle(bounds, {color: "#ffff00", fillOpacity:100}).addTo(map);
-     marker.bindPopup("meno: " + a + "plny zaplateny")
+ //var marker = L.rectangle(bounds, {color: "#ffff00", fillOpacity:100}).addTo(map);
+   //  marker.bindPopup("meno: " + a + "plny zaplateny")
 
     });
   } 

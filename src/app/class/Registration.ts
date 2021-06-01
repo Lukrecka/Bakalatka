@@ -1,7 +1,6 @@
 export class Registration {
 
   id_user: number;
-  id_grave : number;
   name: string;
   lastname: string;
   email: string;

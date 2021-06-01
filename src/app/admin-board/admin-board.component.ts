@@ -16,6 +16,7 @@ export class AdminBoardComponent implements OnInit {
   selectedValue = "cemetery";
   optionValue;
   public loginID;
+  public choose = -1;
   cemetery: Cemetery[];
   corpses: Corpses[];
   registration: Registration[];
@@ -23,7 +24,7 @@ export class AdminBoardComponent implements OnInit {
   arr: DeleteA[];
   selectedGrave: Cemetery = {id_grave: null, id_user:null, coor1: null, coor2: null, coor3: null, coor4: null, type: null};
   selectedCorpse : Corpses = {id_corpse: null, id_grave: null, name: null, lastname: null, birthDay: null, deadDay: null, paidBy: null  };
-  selectedUser : Registration = {id_user: null, id_grave: null, name: null, lastname: null, email: null, password: null, number: null, town: null, street: null, number_house:null, postcode: null};
+  selectedUser : Registration = {id_user: null, name: null, lastname: null, email: null, password: null, number: null, town: null, street: null, number_house:null, postcode: null};
   selectedPayment : Payment = {id_user: null, id_grave: null, paidDay: null, type: null };
   constructor(private ApiService: ApiService,
     private MapService: MapService,) { }
@@ -44,6 +45,15 @@ export class AdminBoardComponent implements OnInit {
     this.payment = payment;
   })
 }
+
+selectedTable: string = '';
+
+//event handler for the select element's change event
+selectChangeHandler (event: any) {
+  //update the ui
+  this.selectedTable = event.target.value;
+}
+
 
 select(){
   this.selectedValue = "users";
@@ -147,6 +157,15 @@ logout(){
 
 sendMails():void{
   this.MapService.sendMails().subscribe((res: any) =>{});
+}
+
+chooseCreate(){
+  this.choose = 1;
+}
+
+reset(){
+  console.log("reset",this.choose);
+  this.choose = -1;
 }
 
 }

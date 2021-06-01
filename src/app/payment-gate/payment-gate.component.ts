@@ -1,7 +1,7 @@
 import { Component, Injectable, OnInit } from '@angular/core';
 import { render } from 'creditcardpayments/creditCardPayments';
 import { BuyGraveComponent } from '../buy-grave/buy-grave.component';
-import { BuyGrave } from '../class/Registration';
+import { BuyGrave, Registration } from '../class/Registration';
 import { ApiService } from '../_services/api.service';
 
 @Component({
@@ -16,10 +16,13 @@ export class PaymentGateComponent implements OnInit {
 
   constructor(private buyGrave: BuyGraveComponent,
     private ApiService: ApiService) { }
+  registration: Registration[];
+  selectedUser : Registration = {id_user: null, name: null, lastname: null, email: null, password: null, number: null, town: null, street: null, number_house:null, postcode: null};
   public userID;
   public graveID;
   public newOld;
   public isPaid = false;
+  public update = -1;
   selectedGraveAll : BuyGrave = {id_user : null, id_grave : null}
   ngOnInit(): void {
     
@@ -29,6 +32,9 @@ export class PaymentGateComponent implements OnInit {
     
     this.selectedGraveAll.id_grave = Number(this.graveID);
     this.selectedGraveAll.id_user = Number(this.userID);
+    this.ApiService.readUserProfil().subscribe((registration: Registration[])=>{
+      this.registration = registration;
+    });
 
     console.log('id', this.ApiService.GraveID );
     console.log('idser', this.ApiService.LoginID);
@@ -45,9 +51,11 @@ export class PaymentGateComponent implements OnInit {
           if(details['status'] == 'COMPLETED'){
             if(this.newOld == 0){
               this.ApiService.buyGrave(this.selectedGraveAll);
+              this.ApiService.pdfGenerate(this.selectedGraveAll);
             }
             if(this.newOld == 1){
               this.ApiService.contractExtension(this.selectedGraveAll);
+              this.ApiService.pdfGenerate(this.selectedGraveAll);
             }
           alert("Transaction Successfull");
           // this.ApiService.buyGrave(this.selectedGraveAll);
@@ -95,6 +103,33 @@ export class PaymentGateComponent implements OnInit {
       scripttagElement.onload = resolve;
       document.body.appendChild(scripttagElement);
     })
+  }
+
+  updateUser(form){
+    console.log("create",this.selectedUser ,this.selectedUser.id_user );
+    if(this.selectedUser && this.selectedUser.id_user){
+      console.log("id upd",form.value.id_user);
+      form.value.id_user = this.selectedUser.id_user;
+      this.ApiService.updateUser(this.selectedUser).subscribe((registrations: Registration)=>{
+        console.log("User updated" , form.value);
+      });
+    }
+  
+  }
+
+  selectUser(registration: Registration){
+    this.update = 1;
+    //console.log("update", this.update);
+    this.selectedUser = registration;
+    console.log("select",this.selectedUser.email);
+  }
+
+  reset(){
+    this.update = -1;
+  }
+
+  logout(){
+    this.ApiService.logOut();
   }
 
 }
