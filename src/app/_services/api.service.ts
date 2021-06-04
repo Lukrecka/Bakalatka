@@ -38,6 +38,10 @@ export class ApiService {
     return this.http.get<Cemetery[]>(`http://localhost/readAdmin/readAdminCemetery.php/`);
   }
 
+  readCemeteryBuy(): Observable<Cemetery[]>{
+    return this.http.get<Cemetery[]>(`http://localhost/user/buyGraveCemetery.php/`);
+  }
+
   readCorpses(): Observable<Corpses[]>{
     return this.http.get<Corpses[]>(`http://localhost/readAdmin/readAdminCorpses.php`);
   }
@@ -56,37 +60,29 @@ deleteSom(id: number,type: string){
 
 //UPDATE or CREATE record ADMIN
 updateUser(registration: Registration){
-  console.log("api reg", registration);
-  return this.http.put<Registration>(`http://localhost/adminCRUD/updateUser.php`, registration)
+  return this.http.post<Registration>(`http://localhost/adminCRUD/updateUser.php`, registration)
 }
 updateCorpse(corpse: Corpses){
-  console.log("api", corpse);
-  return this.http.put<Corpses>(`http://localhost/adminCRUD/updateCorpse.php`,corpse);
+  return this.http.post<Corpses>(`http://localhost/adminCRUD/updateCorpse.php`,corpse);
 } 
 createCorpse(corpse: Corpses): Observable<Corpses>{
-  console.log("create cor", corpse);
   return this.http.post<Corpses>(`http://localhost/adminCRUD/createCorpse.php`, corpse);
 }
 updateGrave(cemetery: Cemetery){
-  console.log("api", cemetery);
-  return this.http.put<Cemetery>(`http://localhost/adminCRUD/updateGrave.php`,cemetery);
+  return this.http.post<Cemetery>(`http://localhost/adminCRUD/updateGrave.php`,cemetery);
 } 
 createGrave(cemetery: Cemetery): Observable<Cemetery>{
-  console.log("create cor", cemetery);
   return this.http.post<Cemetery>(`http://localhost/adminCRUD/createGrave.php`, cemetery);
 }
 updatePayment(payment: Payment){
-  console.log("api", payment);
   return this.http.post<Payment>(`http://localhost/adminCRUD/updatePayment.php`,payment);
 } 
 createPayment(payment: Payment): Observable<Payment>{
-  console.log("create cor", payment);
   return this.http.post<Payment>(`http://localhost/adminCRUD/createPayment.php`, payment);
 }
 
 //REGISTRATION users
 registerUser(userData: Registration): number {
-  console.log(userData);
   const x = this.http.post(this.apiUrl, userData, httpOptions).subscribe(
     (res) => console.log(res),
     (err) => console.log(err)
@@ -99,7 +95,6 @@ control(res){
 
   console.log("control ", res[0]['prihlasenie'] );
   if(res[0]['prihlasenie']  != false){
-    console.log("prihllaseny");
     //ADMIN
     if(res[0]['prihlasenie'] == 1){
       this.router.navigate(['/adminBoard'],{ skipLocationChange: true });
@@ -120,7 +115,6 @@ control(res){
 
 loginrUser(userData: Login): any {
 
-console.log("api ", userData);
 const x = this.http.post(this.apiUrl, userData, httpOptions).subscribe(response => {
  // this.control(response);
 
@@ -137,8 +131,6 @@ return -1;
 logOut(){
   this.router.navigate(['/info']);
   this.LoginID = -1;
-  console.log("log out", this.LoginID);
-
 } 
 
 isLog(){

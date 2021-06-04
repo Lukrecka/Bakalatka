@@ -7,8 +7,8 @@
                 <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
                 <li *ngIf="loginID == -1"><a routerLink="/login" routerLinkActive="active">Prihlásenie</a></li>
                 <li *ngIf="loginID == -1"><a routerLink="/registration" routerLinkActive="active">Registrácia</a></li>
-                <li *ngIf="loginID > 0 || loginID == 0"><a routerLink="/buy-Grave" routerLinkActive="active">Kúpa miesta</a></li>
-                <li *ngIf="loginID == 0"><a routerLink="/adminBoard" routerLinkActive="active">Moja nástenka</a></li>
+                <li *ngIf="loginID > 0 || loginID == 1"><a routerLink="/buy-Grave" routerLinkActive="active">Kúpa miesta</a></li>
+                <li *ngIf="loginID == 1"><a routerLink="/adminBoard" routerLinkActive="active">Moja nástenka</a></li>
                  <li *ngIf="loginID > 0"><a routerLink="/userBoard" routerLinkActive="active">Moja nástenka</a></li>
                 </ul>
                 <button *ngIf="loginID > 0 || loginID == 0" (click)="logout()">Odhlasenie</button>

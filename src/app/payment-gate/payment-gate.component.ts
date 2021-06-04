@@ -23,6 +23,7 @@ export class PaymentGateComponent implements OnInit {
   public newOld;
   public isPaid = false;
   public update = -1;
+  public loginID;
   selectedGraveAll : BuyGrave = {id_user : null, id_grave : null}
   ngOnInit(): void {
     
@@ -36,18 +37,13 @@ export class PaymentGateComponent implements OnInit {
       this.registration = registration;
     });
 
-    console.log('id', this.ApiService.GraveID );
-    console.log('idser', this.ApiService.LoginID);
-    console.log('newOld', this.ApiService.newOld);
-    console.log("sel all", this.selectedGraveAll);
     render(
       {
         id:"#myPaypalButtons",
         currency: "USD",
         value: "1.00",
         onApprove: (details) =>{
-          console.log(details);
-          console.log(details['status']);
+
           if(details['status'] == 'COMPLETED'){
             if(this.newOld == 0){
               this.ApiService.buyGrave(this.selectedGraveAll);
@@ -57,8 +53,7 @@ export class PaymentGateComponent implements OnInit {
               this.ApiService.contractExtension(this.selectedGraveAll);
               this.ApiService.pdfGenerate(this.selectedGraveAll);
             }
-          alert("Transaction Successfull");
-          // this.ApiService.buyGrave(this.selectedGraveAll);
+          alert("Platba bola úspešná");
          }
         }
 

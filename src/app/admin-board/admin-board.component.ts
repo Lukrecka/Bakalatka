@@ -48,9 +48,7 @@ export class AdminBoardComponent implements OnInit {
 
 selectedTable: string = '';
 
-//event handler for the select element's change event
 selectChangeHandler (event: any) {
-  //update the ui
   this.selectedTable = event.target.value;
 }
 
@@ -96,14 +94,12 @@ updateCorpse(form){
   if(this.selectedCorpse && this.selectedCorpse.id_corpse){
     form.value.id_corpse == this.selectedCorpse.id_corpse;
     this.ApiService.updateCorpse(this.selectedCorpse).subscribe((corpse: Corpses)=>{
-      console.log("User update", corpse);
     });
   }
 }
 
 createCorpse(form){
   this.ApiService.createCorpse(form.value).subscribe((corpse: Corpses)=>{
-    console.log("Grave corpse, ", corpse);
   });
 }
 
@@ -111,13 +107,11 @@ updateGrave(form){
   if(this.selectedGrave && this.selectedGrave.id_grave){
     form.value.id_corpse == this.selectedGrave.id_grave;
     this.ApiService.updateGrave(this.selectedGrave).subscribe((cemetery: Cemetery)=>{
-      console.log("Grave update", cemetery);
     });
   }
 }
 createGrave(form){
     this.ApiService.createGrave(form.value).subscribe((cemetery: Cemetery)=>{
-      console.log("Grave created, ", cemetery);
     });
 }
 
@@ -125,13 +119,11 @@ updatePayment(form){
   if(this.selectedPayment && this.selectedPayment.id_user){
     form.value.id_corpse == this.selectedPayment.id_user;
     this.ApiService.updatePayment(this.selectedPayment).subscribe((payment: Payment)=>{
-      console.log("Grave update", payment);
     });
   }
 }
 createPayment(form){
     this.ApiService.createPayment(form.value).subscribe((payment: Payment)=>{
-      console.log("Grave created, ", payment);
     });
 }
 

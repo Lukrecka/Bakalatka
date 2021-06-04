@@ -37,7 +37,7 @@ export class BuyGraveComponent implements OnInit {
     
      }
   ngOnInit(): void {
-    this.ApiService.readCemetery().subscribe((cemetery: Cemetery[])=>{
+    this.ApiService.readCemeteryBuy().subscribe((cemetery: Cemetery[])=>{
       this.cemetery = cemetery;
     });
     this.loginID = this.ApiService.LoginID;
@@ -89,31 +89,15 @@ export class BuyGraveComponent implements OnInit {
         var lat2 = res[i]['coor3'];
         var lon2 = res[i]['coor4'];
         var bounds = [[lat1,lon1], [lat2,lon2]];
-        //const popupInfo = `
-       // ${id_grave} <br> <button class="vyber" (click)="selectId1(${id_grave})" >Vyber</button>`
+
        if(id == id_grave && id != 0){
         var marker = L.rectangle(bounds, {color: "#00ff00", fillOpacity:100}).addTo(map);
         marker.bindPopup("id" + res[i]['id_grave']).openPopup();
        }
        
        if(id_user == 0){
-          
-          console.log("prazdny volny");
           var marker = L.rectangle(bounds, {color: "#e60000", fillOpacity:100}).addTo(map);
           marker.bindPopup("ID Miesta: " + res[i]['id_grave'] + '<br/>'+  '<button (click)="selectId()">Update</button' +"Voľné miesto") 
-
-          /*
-          L.rectangle(bounds, {color: "#000099", fillOpacity:100})
-          .addTo(this.map)
-          .bindPopup(`${id_grave} <br> <button class="vyber" (click)="selectId1(${id_grave})" >Vyber</button>`, popupOptions)
-          .on("popupopen", () => {
-            this.elementRef.nativeElement
-              .querySelector(".vyber")
-              .addEventListener("click", e => {
-                this.selectId(id_grave);
-              });
-          }); */
-
         }
         i++;
       } 
@@ -155,16 +139,8 @@ export class BuyGraveComponent implements OnInit {
 
   selectId(a){
     this.selectedIdGrave = a;
-    console.log(this.selectedIdGrave);
-    console.log("selectid", a);
   }
-
- // selectGrave : BuyGrave = {id_user: this.LoginID, id_grave: this.selectedIdGrave, paidDay: null, type: null };
- // buyGrave(): void {
-    
-    //const x = this.ApiService.registerUser(data);
-    //console.log(data);
- // } 
+ 
 
  logout(){
   this.ApiService.logOut();

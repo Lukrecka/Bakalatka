@@ -29,10 +29,8 @@ export class MapService {
     var i = 0;
     this.http.get(this.apiUrl).subscribe((res: any) =>{
       for(const c of res){
-        //console.log(res[i]['Priezvisko']);
         var lastname = res[i]['lastname'];
         if(lastname.toUpperCase() == data['lastname'].toUpperCase()){
-          //console.log("rovna sa");
           return 1;
         }
         else {return 0;}

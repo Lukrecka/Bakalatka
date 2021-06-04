@@ -13,17 +13,13 @@ export class RegistrationComponent implements OnInit {
   constructor(private ApiService: ApiService) { }
 
   ngOnInit(): void {
-    //this.ApiService.readValues().subscribe((registrations: Registration[])=>{
-      //this.registrations = registrations;
-      //console.log(this.registrations);
-      //console.log('id', this.ApiService.LoginID);
-    //}) 
   }
 
   registerUser(data): void {
     data.action = 'register';
     const x = this.ApiService.registerUser(data);
     console.log(data);
+    alert("Registrácia bola úspešná");
   } 
 
 }

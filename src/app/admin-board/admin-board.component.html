@@ -1,12 +1,12 @@
 <div class="navBar">
   <nav>
       <ul>
-      <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
+        <li *ngIf="loginID == 1"><a routerLink="/adminBoard" routerLinkActive="active">Moja nástenka</a></li>
+        <li><a routerLink="/info" routerLinkActive="active">Úvod</a></li>
         <li><a routerLink="/map" routerLinkActive="active">Mapa cintorína</a></li>
-        <li *ngIf="loginID > 0 || loginID == 0"><a routerLink="/buy-Grave" routerLinkActive="active">Kúpa miesta</a></li>
-        <li *ngIf="loginID == 0"><a routerLink="/adminBoard" routerLinkActive="active">Moja nástenka</a></li>
+        <li *ngIf="loginID > 0 || loginID == 1"><a routerLink="/buy-Grave" routerLinkActive="active">Kúpa miesta</a></li>
         <button class="sendMails" (click)="sendMails()">Poslat mail</button>
-        <button class="logout" (click)="logout()">Odhlasenie</button>
+        <button class="logout" (click)="logout()">Odhlásenie</button>
         <button (click)="chooseCreate()">Vytvoriť záznam</button>
       </ul>
     
@@ -28,6 +28,7 @@
 <table  border='1' width='100%' style='border-collapse: collapse;'>
     <tr>
       <th>ID miesta</th>
+      <th>ID užívateľa</th>
       <th>Súradnica 1</th>
       <th>Súradnica 2</th>
       <th>Súradnica 3</th>

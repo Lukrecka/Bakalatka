@@ -13,7 +13,6 @@ export class InfoComponent implements OnInit {
   public loginID;
   ngOnInit(): void {
     this.loginID = this.ApiService.LoginID;
-    console.log('id', this.ApiService.LoginID);
   }
 
   logout(){

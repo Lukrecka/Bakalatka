@@ -23,8 +23,6 @@ export class UserBoardComponent implements OnInit {
   public update = -1;
   ngOnInit(): void {
     this.loginID = this.ApiService.LoginID;
-    console.log('id', this.ApiService.LoginID);
-    console.log("user cemetery", this.cemetery);
 
     this.ApiService.readUserProfil().subscribe((registration: Registration[])=>{
       this.registration = registration;
@@ -56,12 +54,10 @@ export class UserBoardComponent implements OnInit {
   }
 
   updateUser(form){
-    console.log("create",this.selectedUser ,this.selectedUser.id_user );
+
     if(this.selectedUser && this.selectedUser.id_user){
-      console.log("id upd",form.value.id_user);
       form.value.id_user = this.selectedUser.id_user;
       this.ApiService.updateUser(this.selectedUser).subscribe((registrations: Registration)=>{
-        console.log("User updated" , form.value);
       });
     }
   
@@ -69,7 +65,6 @@ export class UserBoardComponent implements OnInit {
 
   selectUser(registration: Registration){
     this.update = 1;
-    console.log("update", this.update);
     this.selectedUser = registration;
   }
 
